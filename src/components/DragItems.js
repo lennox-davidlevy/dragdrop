@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import Item from './Item';
 
 const DragItems = ({
   items,
@@ -8,6 +9,7 @@ const DragItems = ({
   handleDragEnter,
   handleDragStart,
   getStyles,
+  deleteCard,
 }) => {
   return (
     <div>
@@ -15,34 +17,20 @@ const DragItems = ({
         const { title, content } = item;
         const itemId = item.id;
         return (
-          <div
-            onDragEnter={
-              current
-                ? (e) =>
-                    handleDragEnter(e, {
-                      groupIdx,
-                      groupId,
-                      itemIdx,
-                      itemId: itemId,
-                    })
-                : null
-            }
-            draggable={true}
-            onDragStart={(e) =>
-              handleDragStart(e, {
-                groupIdx,
-                groupId,
-                itemIdx,
-                itemId: itemId,
-              })
-            }
+          <Item
             key={itemIdx}
-            id={itemId}
-            className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
-          >
-            <div className="item-title">{title}</div>
-            <div className="item-content">{content}</div>
-          </div>
+            groupIdx={groupIdx}
+            groupId={groupId}
+            itemIdx={itemIdx}
+            itemId={itemId}
+            current={current}
+            handleDragEnter={handleDragEnter}
+            handleDragStart={handleDragStart}
+            getStyles={getStyles}
+            title={title}
+            content={content}
+            deleteCard={deleteCard}
+          />
         );
       })}
     </div>
@@ -50,3 +38,34 @@ const DragItems = ({
 };
 
 export default DragItems;
+
+// return (
+//   <div
+//     onDragEnter={
+//       current
+//         ? (e) =>
+//             handleDragEnter(e, {
+//               groupIdx,
+//               groupId,
+//               itemIdx,
+//               itemId: itemId,
+//             })
+//         : null
+//     }
+//     draggable={true}
+//     onDragStart={(e) =>
+//       handleDragStart(e, {
+//         groupIdx,
+//         groupId,
+//         itemIdx,
+//         itemId: itemId,
+//       })
+//     }
+//     key={itemIdx}
+//     id={itemId}
+//     className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
+//   >
+//     <div className="item-title">{title}</div>
+//     <div className="item-content">{content}</div>
+//   </div>
+// );
