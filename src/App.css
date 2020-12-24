@@ -53,6 +53,11 @@ body {
   border-radius: 2px;
   padding: 0.3rem;
 }
+
+.current {
+  background-color: #6c7588;
+  color: rgba(0, 0, 0, 0);
+}
 .drag-item:not(:last-child) {
   margin-bottom: 0.5rem;
 }
