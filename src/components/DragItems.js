@@ -12,11 +12,6 @@ const DragItems = ({ items, groupIdx, groupId, dragItem }) => {
     setCurrent(true);
   };
 
-  // const handleDragEnd = (e, params) => {
-  //   dragItem.current = null;
-  //   setCurrent(false);
-  // };
-
   const handleDragEnd = () => {
     console.log('ending drag');
     dragItem.current = null;
@@ -44,9 +39,6 @@ const DragItems = ({ items, groupIdx, groupId, dragItem }) => {
             onDragStart={(e) =>
               handleDragStart(e, { groupIdx, groupId, itemIdx, itemId: id })
             }
-            // onDragEnd={(e) =>
-            //   handleDragEnd(e, { groupIdx, groupId, itemIdx, itemId: groupId })
-            // }
             key={itemIdx}
             id={id}
             className={

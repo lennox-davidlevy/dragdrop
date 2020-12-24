@@ -15,7 +15,6 @@ const DragContainer = ({ data }) => {
   };
 
   const handleDragEnter = (e, params) => {
-    // console.log('entering', params);
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
       setList((oldList) => {
