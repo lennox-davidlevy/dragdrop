@@ -7,8 +7,8 @@ const App = () => {
   return (
     <div className="App">
       <div className="App-header">
-        <Login />
-        {/* <DragGroup data={data} /> */}
+        {/* <Login /> */}
+        <DragGroup data={data} />
       </div>
     </div>
   );
