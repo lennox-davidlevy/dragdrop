@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import DragItems from './DragItems';
 
 const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
@@ -63,44 +64,7 @@ const DragContainer = ({ data }) => {
             className="drag-group"
           >
             <div className="group-title">{title}</div>
-            {items.map((item, itemIdx) => {
-              const { title, content } = item;
-              const itemId = item.id;
-              return (
-                <div
-                  onDragEnter={
-                    current
-                      ? (e) =>
-                          handleDragEnter(e, {
-                            groupIdx,
-                            groupId,
-                            itemIdx,
-                            itemId: itemId,
-                          })
-                      : null
-                  }
-                  draggable={true}
-                  onDragStart={(e) =>
-                    handleDragStart(e, {
-                      groupIdx,
-                      groupId,
-                      itemIdx,
-                      itemId: itemId,
-                    })
-                  }
-                  // onDragEnd={handleDragEnd}
-                  key={itemIdx}
-                  id={itemId}
-                  className={
-                    current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'
-                  }
-                  // className="drag-item"
-                >
-                  <div className="item-title">{title}</div>
-                  <div className="item-content">{content}</div>
-                </div>
-              );
-            })}
+            <DragItems />
           </div>
         );
       })}

@@ -1,49 +1,44 @@
 import React, { useState, useRef } from 'react';
 
-const DragItems = ({ items, groupIdx, groupId, dragItem }) => {
-  const [current, setCurrent] = useState(false);
-  const dragNode = useRef();
-
-  const handleDragStart = (e, params) => {
-    e.preventDefault();
-    dragItem.current = params;
-    dragNode.current = e.target;
-    dragNode.current.addEventListener('dragend', handleDragEnd);
-    setCurrent(true);
-  };
-
-  const handleDragEnd = () => {
-    console.log('ending drag');
-    dragItem.current = null;
-    dragNode.current = null;
-    setCurrent(false);
-  };
-
-  const getStyles = (e, params) => {
-    e.preventDefault();
-    const currentItem = dragItem.current;
-    const { groupIdx, itemIdx } = params;
-    if (currentItem.groupIdx === groupIdx && currentItem.itemIdx === itemIdx) {
-      return 'current drag-item';
-    }
-    return 'drag-item';
-  };
-
+const DragItems = ({
+  items,
+  groupIdx,
+  groupId,
+  current,
+  handleDragEnter,
+  handleDragStart,
+  getStyles,
+}) => {
   return (
     <div>
       {items.map((item, itemIdx) => {
-        const { id, title, content } = item;
+        const { title, content } = item;
+        const itemId = item.id;
         return (
           <div
+            onDragEnter={
+              current
+                ? (e) =>
+                    handleDragEnter(e, {
+                      groupIdx,
+                      groupId,
+                      itemIdx,
+                      itemId: itemId,
+                    })
+                : null
+            }
             draggable={true}
             onDragStart={(e) =>
-              handleDragStart(e, { groupIdx, groupId, itemIdx, itemId: id })
+              handleDragStart(e, {
+                groupIdx,
+                groupId,
+                itemIdx,
+                itemId: itemId,
+              })
             }
             key={itemIdx}
-            id={id}
-            className={
-              current ? (e) => getStyles({ e, groupIdx, itemIdx }) : 'drag-item'
-            }
+            id={itemId}
+            className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
           >
             <div className="item-title">{title}</div>
             <div className="item-content">{content}</div>
