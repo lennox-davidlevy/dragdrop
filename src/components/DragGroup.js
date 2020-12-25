@@ -6,6 +6,7 @@ import Masonry from 'react-masonry-css';
 const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
+  const [editTitle, setEditTitle] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
   const newGroup = useRef();
@@ -106,6 +107,10 @@ const DragContainer = ({ data }) => {
     500: 1,
   };
 
+  const handleTitleState = () => {
+    setEditTitle(!editTitle);
+  };
+
   const items = list.map((item, groupIdx) => {
     const { title, items } = item;
     const groupId = item.id;
@@ -121,7 +126,18 @@ const DragContainer = ({ data }) => {
         className="drag-group"
         // ref={groupIdx === list.length - 1 ? newGroup : null}
       >
-        <div className="group-title">{title}</div>
+        {editTitle ? (
+          <input
+            className="title-text"
+            type="text"
+            value={title}
+            onBlur={setEditTitle}
+          />
+        ) : (
+          <div className="group-title" onClick={setEditTitle}>
+            {title}
+          </div>
+        )}
         <DragItems
           items={items}
           groupIdx={groupIdx}
