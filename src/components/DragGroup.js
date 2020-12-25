@@ -1,12 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import DragItems from './DragItems';
 import Button from './Button';
+import Masonry from 'react-masonry-css';
 
 const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
+  const newGroup = useRef();
+
+  // const refs = useRef(
+  //   Array.from({ length: list.length }, () => React.createRef())
+  // );
 
   const handleDragStart = (e, params) => {
     console.log('handledragstart ran');
@@ -93,45 +99,61 @@ const DragContainer = ({ data }) => {
     setList(newList);
   };
 
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
+  const items = list.map((item, groupIdx) => {
+    const { title, items } = item;
+    const groupId = item.id;
+    return (
+      <div
+        key={groupIdx}
+        id={groupId}
+        onDragEnter={
+          current && !item.items.length
+            ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
+            : null
+        }
+        className="drag-group"
+        // ref={groupIdx === list.length - 1 ? newGroup : null}
+      >
+        <div className="group-title">{title}</div>
+        <DragItems
+          items={items}
+          groupIdx={groupIdx}
+          groupId={groupId}
+          current={current}
+          handleDragEnter={handleDragEnter}
+          handleDragStart={handleDragStart}
+          getStyles={getStyles}
+          deleteCard={deleteCard}
+        />
+        <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
+        <Button
+          clickHandler={deleteGroup}
+          item={groupIdx}
+          title="Delete Group"
+        />
+        {groupIdx === list.length - 1 && (
+          <Button clickHandler={addGroup} title="Add Group" />
+        )}
+      </div>
+    );
+  });
+
   return (
     <div className="drag_drop">
-      {list.map((item, groupIdx) => {
-        const { title, items } = item;
-        const groupId = item.id;
-        return (
-          <div
-            key={groupIdx}
-            id={groupId}
-            onDragEnter={
-              current && !item.items.length
-                ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
-                : null
-            }
-            className="drag-group"
-          >
-            <div className="group-title">{title}</div>
-            <DragItems
-              items={items}
-              groupIdx={groupIdx}
-              groupId={groupId}
-              current={current}
-              handleDragEnter={handleDragEnter}
-              handleDragStart={handleDragStart}
-              getStyles={getStyles}
-              deleteCard={deleteCard}
-            />
-            <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
-            <Button
-              clickHandler={deleteGroup}
-              item={groupIdx}
-              title="Delete Group"
-            />
-            {groupIdx === list.length - 1 && (
-              <Button clickHandler={addGroup} title="Add Group" />
-            )}
-          </div>
-        );
-      })}
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {items}
+      </Masonry>
     </div>
   );
 };
