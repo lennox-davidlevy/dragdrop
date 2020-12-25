@@ -7,19 +7,13 @@ const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
-  const [titles, setTitles] = useState([]);
+  const [groupData, setGroupData] = useState([]);
   const dragItem = useRef();
   const dragNode = useRef();
   const newGroup = useRef([]);
   newGroup.current = [];
 
   useEffect(() => {
-    const arr = [];
-    list.map((item, index) => {
-      const temp = { [index]: item.title };
-      arr.push(temp);
-    });
-    setTitles(arr);
     newGroup.current[newGroup.current.length - 1].focus();
   }, [list]);
 
@@ -116,9 +110,9 @@ const DragContainer = ({ data }) => {
 
   const handleTitleChange = (e, index) => {
     const { name, value } = e.target;
-    const tempTitles = [...titles];
-    tempTitles[index] = { ...tempTitles[index], [name]: value };
-    console.log(tempTitles);
+    const tempList = JSON.parse(JSON.stringify(list));
+    tempList[index] = { ...tempList[index], title: value };
+    setList(tempList);
   };
 
   const addToRefs = (el) => {
@@ -131,7 +125,7 @@ const DragContainer = ({ data }) => {
     const { title, items } = item;
     const groupId = item.id;
     return (
-      titles && (
+      groupData && (
         <div
           key={groupIdx}
           id={groupId}
@@ -145,7 +139,8 @@ const DragContainer = ({ data }) => {
           <input
             className="title-text"
             type="text"
-            value={titles[0][0]}
+            // value={list && list[groupIdx] ? list[groupIdx]['title'] : null}
+            value={list[groupIdx]['title']}
             name={groupIdx}
             ref={addToRefs}
             onChange={(e) => handleTitleChange(e, groupIdx)}
