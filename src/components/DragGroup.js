@@ -7,11 +7,8 @@ const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
-  const [groupData, setGroupData] = useState([]);
   const dragItem = useRef();
   const dragNode = useRef();
-  const newGroup = useRef([]);
-  newGroup.current = [];
 
   const handleDragStart = (e, params) => {
     dragItem.current = params;
@@ -100,64 +97,54 @@ const DragContainer = ({ data }) => {
     500: 1,
   };
 
-  const handleTitleChange = (e, index) => {
+  const handleInputChange = (e, index) => {
     const { name, value } = e.target;
     const tempList = JSON.parse(JSON.stringify(list));
-    tempList[index] = { ...tempList[index], title: value };
+    tempList[index] = { ...tempList[index], [name]: value };
     setList(tempList);
-  };
-
-  const addToRefs = (el) => {
-    if (el && !newGroup.current.includes(el)) {
-      newGroup.current.push(el);
-    }
   };
 
   const items = list.map((item, groupIdx) => {
     const { title, items } = item;
     const groupId = item.id;
     return (
-      groupData && (
-        <div
-          key={groupIdx}
-          id={groupId}
-          onDragEnter={
-            current && !item.items.length
-              ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
-              : null
-          }
-          className="drag-group"
-          ref={addToRefs}
-        >
-          <input
-            className="title-text"
-            type="text"
-            // value={list && list[groupIdx] ? list[groupIdx]['title'] : null}
-            value={list[groupIdx]['title']}
-            name={groupIdx}
-            onChange={(e) => handleTitleChange(e, groupIdx)}
-          />
-          <DragItems
-            items={items}
-            groupIdx={groupIdx}
-            groupId={groupId}
-            current={current}
-            handleDragEnter={handleDragEnter}
-            handleDragStart={handleDragStart}
-            getStyles={getStyles}
-            deleteCard={deleteCard}
-          />
-          <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
-          <Button
-            clickHandler={deleteGroup}
-            item={groupIdx}
-            title="Delete Group"
-          />
-          {groupIdx === list.length - 1 && (
-            <Button clickHandler={addGroup} title="Add Group" />
-          )}
-        </div>
-      )
+      <div
+        key={groupIdx}
+        id={groupId}
+        onDragEnter={
+          current && !item.items.length
+            ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
+            : null
+        }
+        className="drag-group"
+      >
+        <input
+          className="title-text"
+          type="text"
+          value={list[groupIdx]['title']}
+          name="title"
+          onChange={(e) => handleInputChange(e, groupIdx)}
+        />
+        <DragItems
+          items={items}
+          groupIdx={groupIdx}
+          groupId={groupId}
+          current={current}
+          handleDragEnter={handleDragEnter}
+          handleDragStart={handleDragStart}
+          getStyles={getStyles}
+          deleteCard={deleteCard}
+        />
+        <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
+        <Button
+          clickHandler={deleteGroup}
+          item={groupIdx}
+          title="Delete Group"
+        />
+        {groupIdx === list.length - 1 && (
+          <Button clickHandler={addGroup} title="Add Group" />
+        )}
+      </div>
     );
   });
 
