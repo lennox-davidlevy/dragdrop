@@ -6,16 +6,11 @@ import Masonry from 'react-masonry-css';
 const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
+  const [editTitle, setEditTitle] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
-  const newGroup = useRef();
-
-  // const refs = useRef(
-  //   Array.from({ length: list.length }, () => React.createRef())
-  // );
 
   const handleDragStart = (e, params) => {
-    console.log('handledragstart ran');
     dragItem.current = params;
     dragNode.current = e.target;
     dragNode.current.addEventListener('dragend', handleDragEnd);
@@ -23,8 +18,6 @@ const DragContainer = ({ data }) => {
   };
 
   const handleDragEnter = (e, params) => {
-    console.log('handledragenter ran');
-
     const currentItem = dragItem.current;
     if (e.target !== dragNode.current) {
       setList((oldList) => {
@@ -41,7 +34,6 @@ const DragContainer = ({ data }) => {
   };
 
   const handleDragEnd = () => {
-    console.log('handledragend ran');
     setCurrent(false);
     dragNode.current.removeEventListener('dragend', handleDragEnd);
     dragItem.current = null;
@@ -75,12 +67,12 @@ const DragContainer = ({ data }) => {
 
   const addGroup = () => {
     let newList = JSON.parse(JSON.stringify(list));
-    let newGroup = {
+    let currentGroup = {
       id: '2',
       title: 'new group',
       items: [],
     };
-    newList.push(newGroup);
+    newList.push(currentGroup);
     setList(newList);
   };
 
@@ -92,7 +84,6 @@ const DragContainer = ({ data }) => {
       title: 'new group',
       items: [],
     };
-
     if (newList.length === 0) {
       newList.push(newGroup);
     }
@@ -104,6 +95,13 @@ const DragContainer = ({ data }) => {
     1100: 3,
     700: 2,
     500: 1,
+  };
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const tempList = JSON.parse(JSON.stringify(list));
+    tempList[index] = { ...tempList[index], [name]: value };
+    setList(tempList);
   };
 
   const items = list.map((item, groupIdx) => {
@@ -119,9 +117,14 @@ const DragContainer = ({ data }) => {
             : null
         }
         className="drag-group"
-        // ref={groupIdx === list.length - 1 ? newGroup : null}
       >
-        <div className="group-title">{title}</div>
+        <input
+          className="title-text"
+          type="text"
+          value={list[groupIdx]['title']}
+          name="title"
+          onChange={(e) => handleInputChange(e, groupIdx)}
+        />
         <DragItems
           items={items}
           groupIdx={groupIdx}
@@ -152,7 +155,7 @@ const DragContainer = ({ data }) => {
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
-        {items}
+        {items && items}
       </Masonry>
     </div>
   );
