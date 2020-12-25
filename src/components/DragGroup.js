@@ -13,10 +13,6 @@ const DragContainer = ({ data }) => {
   const newGroup = useRef([]);
   newGroup.current = [];
 
-  useEffect(() => {
-    newGroup.current[newGroup.current.length - 1].focus();
-  }, [list]);
-
   const handleDragStart = (e, params) => {
     dragItem.current = params;
     dragNode.current = e.target;
@@ -104,10 +100,6 @@ const DragContainer = ({ data }) => {
     500: 1,
   };
 
-  // const handleTitleState = () => {
-  //   setEditTitle(!editTitle);
-  // };
-
   const handleTitleChange = (e, index) => {
     const { name, value } = e.target;
     const tempList = JSON.parse(JSON.stringify(list));
@@ -135,6 +127,7 @@ const DragContainer = ({ data }) => {
               : null
           }
           className="drag-group"
+          ref={addToRefs}
         >
           <input
             className="title-text"
@@ -142,7 +135,6 @@ const DragContainer = ({ data }) => {
             // value={list && list[groupIdx] ? list[groupIdx]['title'] : null}
             value={list[groupIdx]['title']}
             name={groupIdx}
-            ref={addToRefs}
             onChange={(e) => handleTitleChange(e, groupIdx)}
           />
           <DragItems
