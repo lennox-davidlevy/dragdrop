@@ -89,10 +89,10 @@ body {
 
 input {
   background-color: transparent;
-  font-size: large;
+  font-size: medium;
   border: 0px solid;
   height: 20px;
-  width: 160px;
+  width: 200px;
   color: black;
 }
 
@@ -102,6 +102,7 @@ textarea {
   height: 100px;
   width: 160px;
   color: black;
+  resize: none;
 }
 
 .delete-item {

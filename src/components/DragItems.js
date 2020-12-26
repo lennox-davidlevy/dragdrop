@@ -70,6 +70,7 @@ const DragItems = ({
                   className="item-content"
                   value={list[groupIdx]['items'][itemIdx]['content']}
                   onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+                  placeholder="Enter text here..."
                 />
               </>
             )}

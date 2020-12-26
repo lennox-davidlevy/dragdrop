@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import DragItems from './DragItems';
 import Button from './Button';
 import Masonry from 'react-masonry-css';
-import { fetchRandomWordArray, breakpointColumnsObj } from '../helper';
+import {
+  handleDragStartHelper,
+  handleDragEnterHelper,
+  addCardHelper,
+  getWordsHelper,
+  addGroupHelper,
+  returnItems,
+  breakpointColumnsObj,
+} from './dragHelpers';
 import { v4 as uuidv4 } from 'uuid';
 
 const DragGroup = ({ data }) => {
@@ -12,6 +20,8 @@ const DragGroup = ({ data }) => {
   const [randomWord, setRandomWord] = useState([]);
   const [image, setImage] = useState(false);
   const [showOption, setShowOption] = useState(false);
+  const [showAddCard, setShowAddCard] = useState(true);
+  const [optionIdx, setOptionIdx] = useState(null);
   const dragItem = useRef();
   const dragNode = useRef();
 
@@ -23,37 +33,22 @@ const DragGroup = ({ data }) => {
   }, [newGroupCheck]);
 
   useEffect(() => {
-    fetch(`https://random-word-api.herokuapp.com/word?number=1000`)
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          setRandomWord(result);
-        },
-        (error) => console.log(error)
-      );
+    getWordsHelper(setRandomWord);
   }, []);
 
   const handleDragStart = (e, params) => {
-    dragItem.current = params;
-    dragNode.current = e.target;
-    dragNode.current.addEventListener('dragend', handleDragEnd);
-    setTimeout(() => setCurrent(true), 0);
+    handleDragStartHelper(
+      e,
+      params,
+      dragItem,
+      dragNode,
+      handleDragEnd,
+      setCurrent
+    );
   };
 
   const handleDragEnter = (e, params) => {
-    const currentItem = dragItem.current;
-    if (e.target !== dragNode.current) {
-      setList((oldList) => {
-        let newList = JSON.parse(JSON.stringify(oldList));
-        newList[params.groupIdx].items.splice(
-          params.itemIdx,
-          0,
-          newList[currentItem.groupIdx].items.splice(currentItem.itemIdx, 1)[0]
-        );
-        dragItem.current = params;
-        return newList;
-      });
-    }
+    handleDragEnterHelper(e, params, dragItem, dragNode, setList);
   };
 
   const handleDragEnd = () => {
@@ -71,43 +66,28 @@ const DragGroup = ({ data }) => {
     return 'drag-item';
   };
 
-  const addCard = (idx) => {
-    let newList = JSON.parse(JSON.stringify(list));
-    newList[idx].items.push({
-      id: uuidv4(),
-      title: 'New Card',
-      content:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vulputate ligula. Morbi accumsan neque et feugiat suscipit. In eu tellus sed ipsum faucibus tempus ut egestas enim.',
-    });
-    setList(newList);
+  const addCard = (idx, isImage) => {
+    addCardHelper(idx, isImage, list, setShowAddCard, setShowOption, setList);
   };
 
   const deleteCard = (groupIdx, itemIdx) => {
     let newList = JSON.parse(JSON.stringify(list));
     newList[groupIdx].items.splice(itemIdx, 1);
     setList(newList);
+    setShowAddCard(true);
+    setShowOption(false);
   };
 
   const addGroup = () => {
-    let newList = JSON.parse(JSON.stringify(list));
-    const tempRandomWord = [...randomWord];
-    let word;
-    if (tempRandomWord.length > 0) {
-      const tempWord = tempRandomWord.pop();
-      word = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
-      setRandomWord(tempRandomWord);
-    } else {
-      word = 'Fetch Off';
-    }
-
-    let currentGroup = {
-      id: uuidv4(),
-      title: `Group ${word}`,
-      items: [],
-    };
-    newList.push(currentGroup);
-    setList(newList);
-    setNewGroupCheck(true);
+    addGroupHelper(
+      list,
+      randomWord,
+      setRandomWord,
+      setList,
+      setNewGroupCheck,
+      setShowAddCard,
+      setShowOption
+    );
   };
 
   const deleteGroup = (groupIdx) => {
@@ -122,6 +102,8 @@ const DragGroup = ({ data }) => {
       newList.push(newGroup);
     }
     setList(newList);
+    setShowAddCard(true);
+    setShowOption(false);
   };
 
   const handleInputChange = (e, index) => {
@@ -141,52 +123,31 @@ const DragGroup = ({ data }) => {
     setList(tempList);
   };
 
-  const items = list.map((item, groupIdx) => {
-    const { items } = item;
-    const groupId = item.id;
-    return (
-      <div
-        key={groupIdx}
-        // id={groupId}
-        onDragEnter={
-          current && !item.items.length
-            ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
-            : null
-        }
-        className="drag-group"
-      >
-        <input
-          id={`${groupIdx}input`}
-          className="title-text"
-          type="text"
-          value={list[groupIdx]['title']}
-          name="title"
-          onChange={(e) => handleInputChange(e, groupIdx)}
-        />
-        <DragItems
-          list={list}
-          items={items}
-          groupIdx={groupIdx}
-          groupId={groupId}
-          current={current}
-          handleDragEnter={handleDragEnter}
-          handleDragStart={handleDragStart}
-          getStyles={getStyles}
-          deleteCard={deleteCard}
-          handleInputChange={handleItemInputChange}
-        />
-        <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
-        <Button
-          clickHandler={deleteGroup}
-          item={groupIdx}
-          title="Delete Group"
-        />
-        {groupIdx === list.length - 1 && (
-          <Button clickHandler={addGroup} title="Add Group" />
-        )}
-      </div>
-    );
-  });
+  const handleShowAddCard = (idx) => {
+    setShowAddCard(false);
+    setShowOption(true);
+    setOptionIdx(idx);
+  };
+
+  const items = returnItems(
+    list,
+    current,
+    handleDragEnter,
+    handleDragStart,
+    handleInputChange,
+    handleItemInputChange,
+    DragItems,
+    getStyles,
+    deleteCard,
+    showAddCard,
+    handleShowAddCard,
+    showOption,
+    optionIdx,
+    addCard,
+    addGroup,
+    Button,
+    deleteGroup
+  );
 
   return (
     <div className="drag_drop">
