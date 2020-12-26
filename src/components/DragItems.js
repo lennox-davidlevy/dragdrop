@@ -1,36 +1,67 @@
 import React from 'react';
-import Item from './Item';
 
 const DragItems = ({
+  list,
   items,
   groupIdx,
   groupId,
   current,
   handleDragEnter,
   handleDragStart,
+  handleInputChange,
   getStyles,
   deleteCard,
 }) => {
   return (
     <div>
       {items.map((item, itemIdx) => {
-        const { title, content } = item;
         const itemId = item.id;
         return (
-          <Item
+          <div
+            onDragEnter={
+              current
+                ? (e) =>
+                    handleDragEnter(e, {
+                      groupIdx,
+                      groupId,
+                      itemIdx,
+                      itemId: itemId,
+                    })
+                : null
+            }
+            draggable={true}
+            onDragStart={(e) =>
+              handleDragStart(e, {
+                groupIdx,
+                groupId,
+                itemIdx,
+                itemId: itemId,
+              })
+            }
             key={itemIdx}
-            groupIdx={groupIdx}
-            groupId={groupId}
-            itemIdx={itemIdx}
-            itemId={itemId}
-            current={current}
-            handleDragEnter={handleDragEnter}
-            handleDragStart={handleDragStart}
-            getStyles={getStyles}
-            title={title}
-            content={content}
-            deleteCard={deleteCard}
-          />
+            id={itemId}
+            className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
+          >
+            <div
+              className="delete-item"
+              onClick={() => deleteCard(groupIdx, itemIdx)}
+            >
+              X
+            </div>
+            <input
+              name="title"
+              type="text"
+              className="item-title"
+              value={list[groupIdx]['items'][itemIdx]['title']}
+              onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+            />
+            <textarea
+              name="content"
+              className="item-content"
+              value={list[groupIdx]['items'][itemIdx]['content']}
+              onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+            />
+          </div>
         );
       })}
     </div>

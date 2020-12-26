@@ -6,9 +6,16 @@ import Masonry from 'react-masonry-css';
 const DragContainer = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
-  const [editTitle, setEditTitle] = useState(false);
+  const [newGroupCheck, setNewGroupCheck] = useState(true);
   const dragItem = useRef();
   const dragNode = useRef();
+
+  useEffect(() => {
+    const loc = `${list.length - 1}input`;
+    const newGroupInput = document.getElementById(loc);
+    newGroupInput.focus();
+    setNewGroupCheck(false);
+  }, [newGroupCheck]);
 
   const handleDragStart = (e, params) => {
     dragItem.current = params;
@@ -74,6 +81,7 @@ const DragContainer = ({ data }) => {
     };
     newList.push(currentGroup);
     setList(newList);
+    setNewGroupCheck(true);
   };
 
   const deleteGroup = (groupIdx) => {
@@ -91,9 +99,9 @@ const DragContainer = ({ data }) => {
   };
 
   const breakpointColumnsObj = {
-    default: 4,
+    default: 2,
     1100: 3,
-    700: 2,
+    900: 2,
     500: 1,
   };
 
@@ -104,13 +112,23 @@ const DragContainer = ({ data }) => {
     setList(tempList);
   };
 
+  const handleItemInputChange = (e, index, itemIndex) => {
+    const { name, value } = e.target;
+    const tempList = JSON.parse(JSON.stringify(list));
+    tempList[index]['items'][itemIndex] = {
+      ...tempList[index]['items'][itemIndex],
+      [name]: value,
+    };
+    setList(tempList);
+  };
+
   const items = list.map((item, groupIdx) => {
-    const { title, items } = item;
+    const { items } = item;
     const groupId = item.id;
     return (
       <div
         key={groupIdx}
-        id={groupId}
+        // id={groupId}
         onDragEnter={
           current && !item.items.length
             ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
@@ -119,6 +137,7 @@ const DragContainer = ({ data }) => {
         className="drag-group"
       >
         <input
+          id={`${groupIdx}input`}
           className="title-text"
           type="text"
           value={list[groupIdx]['title']}
@@ -126,6 +145,7 @@ const DragContainer = ({ data }) => {
           onChange={(e) => handleInputChange(e, groupIdx)}
         />
         <DragItems
+          list={list}
           items={items}
           groupIdx={groupIdx}
           groupId={groupId}
@@ -134,6 +154,7 @@ const DragContainer = ({ data }) => {
           handleDragStart={handleDragStart}
           getStyles={getStyles}
           deleteCard={deleteCard}
+          handleInputChange={handleItemInputChange}
         />
         <Button clickHandler={addCard} item={groupIdx} title="Add Card" />
         <Button

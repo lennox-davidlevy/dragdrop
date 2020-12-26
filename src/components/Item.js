@@ -52,3 +52,18 @@ const Item = ({
 };
 
 export default Item;
+//For possible rever
+// <Item
+//   key={itemIdx}
+//   groupIdx={groupIdx}
+//   groupId={groupId}
+//   itemIdx={itemIdx}
+//   itemId={itemId}
+//   current={current}
+//   handleDragEnter={handleDragEnter}
+//   handleDragStart={handleDragStart}
+//   getStyles={getStyles}
+//   title={title}
+//   content={content}
+//   deleteCard={deleteCard}
+// />
