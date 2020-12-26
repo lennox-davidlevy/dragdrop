@@ -29,13 +29,14 @@ body {
   gap: 0.5rem;
   align-items: start;
 }
-.group-title {
+/* .group-title {
+  float: left;
   text-align: left;
   margin-bottom: 0.5rem;
-  /* background: linear-gradient(to left, #4b515f, #6e778a); */
+  background: linear-gradient(to left, #4b515f, #6e778a);
   font-weight: 900;
-  /* border: 1px solid whitesmoke; */
-}
+  border: 1px solid whitesmoke;
+} */
 
 .drag-group {
   border: 3px solid #4b515f;
@@ -84,6 +85,23 @@ body {
 
 .item-content > * {
   padding: 0.5rem 0.5rem;
+}
+
+input {
+  background-color: transparent;
+  font-size: large;
+  border: 0px solid;
+  height: 20px;
+  width: 160px;
+  color: black;
+}
+
+textarea {
+  background-color: transparent;
+  border: 0px solid;
+  height: 100px;
+  width: 160px;
+  color: black;
 }
 
 .delete-item {

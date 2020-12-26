@@ -10,6 +10,8 @@ const DragGroup = ({ data }) => {
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
   const [randomWord, setRandomWord] = useState([]);
+  const [image, setImage] = useState(false);
+  const [showOption, setShowOption] = useState(false);
   const dragItem = useRef();
   const dragNode = useRef();
 
