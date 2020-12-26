@@ -16,6 +16,7 @@ const DragItems = ({
     <div>
       {items.map((item, itemIdx) => {
         const itemId = item.id;
+        const image = item.image;
         return (
           <div
             onDragEnter={
@@ -48,19 +49,30 @@ const DragItems = ({
             >
               X
             </div>
-            <input
-              name="title"
-              type="text"
-              className="item-title"
-              value={list[groupIdx]['items'][itemIdx]['title']}
-              onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
-            />
-            <textarea
-              name="content"
-              className="item-content"
-              value={list[groupIdx]['items'][itemIdx]['content']}
-              onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
-            />
+
+            {image ? (
+              <img
+                className="photo"
+                src={list[groupIdx]['items'][itemIdx]['content']}
+              />
+            ) : (
+              <>
+                {/* <input
+                  name="title"
+                  type="text"
+                  className="item-title"
+                  value={list[groupIdx]['items'][itemIdx]['title']}
+                  onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+                /> */}
+
+                <textarea
+                  name="content"
+                  className="item-content"
+                  value={list[groupIdx]['items'][itemIdx]['content']}
+                  onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+                />
+              </>
+            )}
           </div>
         );
       })}

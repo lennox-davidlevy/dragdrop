@@ -2,11 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import DragItems from './DragItems';
 import Button from './Button';
 import Masonry from 'react-masonry-css';
+import { fetchRandomWordArray, breakpointColumnsObj } from '../helper';
+import { v4 as uuidv4 } from 'uuid';
 
-const DragContainer = ({ data }) => {
+const DragGroup = ({ data }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
+  const [randomWord, setRandomWord] = useState([]);
   const dragItem = useRef();
   const dragNode = useRef();
 
@@ -16,6 +19,17 @@ const DragContainer = ({ data }) => {
     newGroupInput.focus();
     setNewGroupCheck(false);
   }, [newGroupCheck]);
+
+  useEffect(() => {
+    fetch(`https://random-word-api.herokuapp.com/word?number=1000`)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setRandomWord(result);
+        },
+        (error) => console.log(error)
+      );
+  }, []);
 
   const handleDragStart = (e, params) => {
     dragItem.current = params;
@@ -58,8 +72,8 @@ const DragContainer = ({ data }) => {
   const addCard = (idx) => {
     let newList = JSON.parse(JSON.stringify(list));
     newList[idx].items.push({
-      id: 123,
-      title: 'new',
+      id: uuidv4(),
+      title: 'New Card',
       content:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vulputate ligula. Morbi accumsan neque et feugiat suscipit. In eu tellus sed ipsum faucibus tempus ut egestas enim.',
     });
@@ -74,9 +88,19 @@ const DragContainer = ({ data }) => {
 
   const addGroup = () => {
     let newList = JSON.parse(JSON.stringify(list));
+    const tempRandomWord = [...randomWord];
+    let word;
+    if (tempRandomWord.length > 0) {
+      const tempWord = tempRandomWord.pop();
+      word = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+      setRandomWord(tempRandomWord);
+    } else {
+      word = 'Fetch Off';
+    }
+
     let currentGroup = {
-      id: '2',
-      title: 'new group',
+      id: uuidv4(),
+      title: `Group ${word}`,
       items: [],
     };
     newList.push(currentGroup);
@@ -96,13 +120,6 @@ const DragContainer = ({ data }) => {
       newList.push(newGroup);
     }
     setList(newList);
-  };
-
-  const breakpointColumnsObj = {
-    default: 2,
-    1100: 3,
-    900: 2,
-    500: 1,
   };
 
   const handleInputChange = (e, index) => {
@@ -182,4 +199,4 @@ const DragContainer = ({ data }) => {
   );
 };
 
-export default DragContainer;
+export default DragGroup;
