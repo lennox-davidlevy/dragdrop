@@ -1,47 +1,55 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const data = [
   {
-    id: '1',
+    id: uuidv4(),
     title: 'Plans',
     items: [
       {
-        id: 1,
+        id: uuidv4(),
         title: 'today',
+        image: false,
         content:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vulputate ligula. Morbi accumsan neque et feugiat suscipit. In eu tellus sed ipsum faucibus tempus ut egestas enim.',
       },
       {
-        id: 2,
-        title: 'tomorrow',
+        id: uuidv4(),
+        title: 'bunny',
+        image: true,
         content:
-          'Mauris in pellentesque tortor. Aliquam placerat at orci ut consequat. Donec id augue ex. Sed id posuere elit. Phasellus porttitor eleifend justo ut volutpat. Nulla in consectetur augue.',
+          'https://www.ntu.ac.uk/__data/assets/image/0035/884573/Otis-Havana.jpg',
       },
       {
-        id: 3,
+        id: uuidv4(),
         title: 'next week',
+        image: false,
         content:
           'Donec urna magna, varius ut sapien quis, sollicitudin hendrerit metus. Proin viverra nibh a eros blandit, vitae rutrum mi euismod. Phasellus malesuada fermentum nunc vestibulum consequat. Donec consequat accumsan risus id accumsan.',
       },
     ],
   },
   {
-    id: '2',
+    id: uuidv4(),
     title: 'Stuff',
     items: [
       {
-        id: 1,
+        id: uuidv4(),
         title: 'buy',
+        image: false,
         content:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac vulputate ligula. Morbi accumsan neque et feugiat suscipit. In eu tellus sed ipsum faucibus tempus ut egestas enim.',
       },
       {
-        id: 2,
+        id: uuidv4(),
         title: 'sell',
+        image: false,
         content:
           'Mauris in pellentesque tortor. Aliquam placerat at orci ut consequat. Donec id augue ex. Sed id posuere elit. Phasellus porttitor eleifend justo ut volutpat. Nulla in consectetur augue.',
       },
       {
-        id: 3,
+        id: uuidv4(),
         title: 'find',
+        image: false,
         content:
           'Donec urna magna, varius ut sapien quis, sollicitudin hendrerit metus. Proin viverra nibh a eros blandit, vitae rutrum mi euismod. Phasellus malesuada fermentum nunc vestibulum consequat. Donec consequat accumsan risus id accumsan.',
       },

@@ -52,7 +52,7 @@ body {
   align-items: center;
   background-color: whitesmoke;
   color: #282c34;
-  min-height: 150px;
+  min-height: 100px;
   border-radius: 2px;
   padding: 0.3rem;
 }
@@ -74,6 +74,12 @@ body {
   font-size: small;
   text-align: start;
   width: 100%;
+  min-height: 60px;
+}
+
+.photo {
+  height: 150px;
+  width: 160px;
 }
 
 .item-content > * {
