@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 const handleDragStartHelper = (
   e,
@@ -62,15 +63,26 @@ const addCardHelper = (
   setList(newList);
 };
 
-const getWordsHelper = (setRandomWord) => {
-  fetch(`https://random-word-api.herokuapp.com/word?number=1000`)
-    .then((res) => res.json())
-    .then(
-      (result) => {
-        setRandomWord(result);
-      },
-      (error) => console.log(error)
-    );
+//WITHOUT NODE
+// const getWords = (setRandomWord) => {
+//   fetch(`https://random-word-api.herokuapp.com/word?number=1000`)
+//     .then((res) => res.json())
+//     .then(
+//       (result) => {
+//         setRandomWord(result);
+//       },
+//       (error) => console.log(error)
+//     );
+// };
+
+//WITH NODE
+const getWords = async (setRandomWord) => {
+  try {
+    const res = await axios.get('/randomWord');
+    setRandomWord(res.data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const addGroupHelper = (
@@ -210,8 +222,9 @@ export {
   handleDragStartHelper,
   handleDragEnterHelper,
   addCardHelper,
-  getWordsHelper,
+  // getWordsHelper,
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
+  getWords,
 };
