@@ -36,7 +36,8 @@ const addCardHelper = (
   list,
   setShowAddCard,
   setShowOption,
-  setList
+  setList,
+  setOptionIdx
 ) => {
   let newList = JSON.parse(JSON.stringify(list));
   let newCard;
@@ -45,8 +46,7 @@ const addCardHelper = (
       id: uuidv4(),
       title: 'New Card',
       image: true,
-      content:
-        'https://i.pinimg.com/736x/90/42/0f/90420f59fe16af8912eb9a950951db6e.jpg',
+      content: '',
     };
   } else {
     newCard = {
@@ -58,6 +58,7 @@ const addCardHelper = (
   newList[idx].items.push(newCard);
   setShowAddCard(true);
   setShowOption(false);
+  setOptionIdx(null);
   setList(newList);
 };
 
@@ -79,7 +80,8 @@ const addGroupHelper = (
   setList,
   setNewGroupCheck,
   setShowAddCard,
-  setShowOption
+  setShowOption,
+  setOptionIdx
 ) => {
   let newList = JSON.parse(JSON.stringify(list));
   const tempRandomWord = [...randomWord];
@@ -102,6 +104,7 @@ const addGroupHelper = (
   setNewGroupCheck(true);
   setShowAddCard(true);
   setShowOption(false);
+  setOptionIdx(null);
 };
 
 const returnItems = (
@@ -121,7 +124,10 @@ const returnItems = (
   addCard,
   addGroup,
   Button,
-  deleteGroup
+  deleteGroup,
+  setList,
+  imageId,
+  setImageId
 ) => {
   return list.map((item, groupIdx) => {
     const { items } = item;
@@ -156,17 +162,25 @@ const returnItems = (
           getStyles={getStyles}
           deleteCard={deleteCard}
           handleInputChange={handleItemInputChange}
+          setList={setList}
+          imageId={imageId}
+          setImageId={setImageId}
         />
         <div className="button-group">
-          {showAddCard && (
+          {/* showAddCard && */}
+          {optionIdx !== groupIdx && (
             <button onClick={() => handleShowAddCard(groupIdx)}>
               Add Card
             </button>
           )}
           {showOption && optionIdx === groupIdx && (
             <div>
-              <button onClick={() => addCard(groupIdx, true)}>Add Image</button>
-              <button onClick={() => addCard(groupIdx, false)}>Add Text</button>
+              <button onClick={() => addCard(groupIdx, true)}>
+                <i className="fa fa-image"></i>
+              </button>
+              <button onClick={() => addCard(groupIdx, false)}>
+                <i className="fa fa-file-text" aria-hidden="true"></i>
+              </button>
             </div>
           )}
           {/* <Button clickHandler={addCard} item={groupIdx} title="Add Card" /> */}

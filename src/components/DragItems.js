@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DragItems = ({
   list,
@@ -11,7 +11,32 @@ const DragItems = ({
   handleInputChange,
   getStyles,
   deleteCard,
+  setList,
+  imageId,
+  setImageId,
 }) => {
+  const [imgSource, setImgSource] = useState('');
+  const [showImage, setShowImage] = useState(false);
+
+  const handleImgSourceChange = (e) => {
+    setImgSource(e.target.value);
+  };
+
+  const handleSubmitImgSource = (e, itemIdx) => {
+    const tempList = JSON.parse(JSON.stringify(list));
+    tempList[groupIdx]['items'][itemIdx] = {
+      ...tempList[groupIdx]['items'][itemIdx],
+      content: imgSource,
+    };
+    console.log(tempList[groupIdx]['items'][itemIdx]['content']);
+    setList(tempList);
+    const tempId = { ...imageId };
+    tempId[tempList[groupIdx]['items'][itemIdx]['id']] = true;
+    setImageId(tempId);
+    setShowImage(true);
+    setImgSource('');
+  };
+
   return (
     <div>
       {items.map((item, itemIdx) => {
@@ -43,28 +68,36 @@ const DragItems = ({
             id={itemId}
             className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
           >
-            <div
+            <button
               className="delete-item"
               onClick={() => deleteCard(groupIdx, itemIdx)}
             >
               X
-            </div>
+            </button>
 
-            {image ? (
+            {image && imageId[itemId] ? (
               <img
                 className="photo"
                 src={list[groupIdx]['items'][itemIdx]['content']}
               />
+            ) : image ? (
+              <div className="image-group">
+                <input
+                  value={imgSource}
+                  placeholder="Add image source..."
+                  onChange={handleImgSourceChange}
+                />
+                <div className="button-group">
+                  <button onClick={(e) => handleSubmitImgSource(e, itemIdx)}>
+                    <i className="fa fa-check"></i>
+                  </button>
+                  <button onClick={() => deleteCard(groupIdx, itemIdx)}>
+                    <i className="fa fa-window-close"></i>
+                  </button>
+                </div>
+              </div>
             ) : (
-              <>
-                {/* <input
-                  name="title"
-                  type="text"
-                  className="item-title"
-                  value={list[groupIdx]['items'][itemIdx]['title']}
-                  onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
-                /> */}
-
+              <div>
                 <textarea
                   name="content"
                   className="item-content"
@@ -72,7 +105,7 @@ const DragItems = ({
                   onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
                   placeholder="Enter text here..."
                 />
-              </>
+              </div>
             )}
           </div>
         );

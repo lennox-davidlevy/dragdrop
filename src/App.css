@@ -47,10 +47,10 @@ body {
 }
 
 .drag-item {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: center; */
   background-color: whitesmoke;
   color: #282c34;
   min-height: 100px;
@@ -94,6 +94,22 @@ input {
   height: 20px;
   width: 200px;
   color: black;
+}
+
+.delete-item {
+  font-family: 'MS Sans Serif';
+  font-size: 11px;
+  outline: 1px solid #000000;
+  background: #c0c0c0;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 4px 6px;
+  /* margin: 20px auto 3px; */
+  margin-bottom: 0.5rem;
+  display: block;
+  position: relative;
+  bottom: 0px;
 }
 
 textarea {

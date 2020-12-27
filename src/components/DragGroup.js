@@ -22,6 +22,7 @@ const DragGroup = ({ data }) => {
   const [showOption, setShowOption] = useState(false);
   const [showAddCard, setShowAddCard] = useState(true);
   const [optionIdx, setOptionIdx] = useState(null);
+  const [imageId, setImageId] = useState({});
   const dragItem = useRef();
   const dragNode = useRef();
 
@@ -67,7 +68,15 @@ const DragGroup = ({ data }) => {
   };
 
   const addCard = (idx, isImage) => {
-    addCardHelper(idx, isImage, list, setShowAddCard, setShowOption, setList);
+    addCardHelper(
+      idx,
+      isImage,
+      list,
+      setShowAddCard,
+      setShowOption,
+      setList,
+      setOptionIdx
+    );
   };
 
   const deleteCard = (groupIdx, itemIdx) => {
@@ -76,6 +85,7 @@ const DragGroup = ({ data }) => {
     setList(newList);
     setShowAddCard(true);
     setShowOption(false);
+    setOptionIdx(null);
   };
 
   const addGroup = () => {
@@ -86,7 +96,8 @@ const DragGroup = ({ data }) => {
       setList,
       setNewGroupCheck,
       setShowAddCard,
-      setShowOption
+      setShowOption,
+      setOptionIdx
     );
   };
 
@@ -104,6 +115,7 @@ const DragGroup = ({ data }) => {
     setList(newList);
     setShowAddCard(true);
     setShowOption(false);
+    setOptionIdx(null);
   };
 
   const handleInputChange = (e, index) => {
@@ -146,7 +158,10 @@ const DragGroup = ({ data }) => {
     addCard,
     addGroup,
     Button,
-    deleteGroup
+    deleteGroup,
+    setList,
+    imageId,
+    setImageId
   );
 
   return (
