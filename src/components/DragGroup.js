@@ -13,7 +13,7 @@ import {
 } from './dragHelpers';
 import { v4 as uuidv4 } from 'uuid';
 
-const DragGroup = ({ data }) => {
+const DragGroup = ({ data, setNumberOfGroups }) => {
   const [list, setList] = useState(data);
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
@@ -30,6 +30,7 @@ const DragGroup = ({ data }) => {
     const newGroupInput = document.getElementById(loc);
     newGroupInput.focus();
     setNewGroupCheck(false);
+    setNumberOfGroups(list.length);
   }, [newGroupCheck, list.length]);
 
   useEffect(() => {
