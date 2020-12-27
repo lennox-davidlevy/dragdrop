@@ -6,10 +6,10 @@ import {
   handleDragStartHelper,
   handleDragEnterHelper,
   addCardHelper,
-  getWordsHelper,
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
+  getWords,
 } from './dragHelpers';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,7 +18,6 @@ const DragGroup = ({ data }) => {
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
   const [randomWord, setRandomWord] = useState([]);
-  const [image, setImage] = useState(false);
   const [showOption, setShowOption] = useState(false);
   const [showAddCard, setShowAddCard] = useState(true);
   const [optionIdx, setOptionIdx] = useState(null);
@@ -31,10 +30,10 @@ const DragGroup = ({ data }) => {
     const newGroupInput = document.getElementById(loc);
     newGroupInput.focus();
     setNewGroupCheck(false);
-  }, [newGroupCheck]);
+  }, [newGroupCheck, list.length]);
 
   useEffect(() => {
-    getWordsHelper(setRandomWord);
+    getWords(setRandomWord);
   }, []);
 
   const handleDragStart = (e, params) => {
@@ -140,7 +139,7 @@ const DragGroup = ({ data }) => {
     if (imageChange) {
       tempList[index]['items'][itemIndex] = {
         ...tempList[index]['items'][itemIndex],
-        ['content']: value,
+        [name]: value,
       };
     } else {
       tempList[index]['items'][itemIndex] = {

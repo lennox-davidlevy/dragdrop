@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const DragItems = ({
   list,
@@ -15,24 +15,10 @@ const DragItems = ({
   imageId,
   setImageId,
 }) => {
-  const [imgSource, setImgSource] = useState('');
-
-  // const handleImgSourceChange = (e) => {
-  //   setImgSource(e.target.value);
-  // };
-
   const handleSubmitImgSource = (e, itemIdx) => {
-    // const tempList = JSON.parse(JSON.stringify(list));
-    // tempList[groupIdx]['items'][itemIdx] = {
-    //   ...tempList[groupIdx]['items'][itemIdx],
-    //   content: imgSource,
-    // };
-    // console.log(tempList[groupIdx]['items'][itemIdx]['content']);
-    // setList(tempList);
     const tempId = { ...imageId };
     tempId[list[groupIdx]['items'][itemIdx]['id']] = true;
     setImageId(tempId);
-    setImgSource('');
   };
 
   return (
@@ -80,13 +66,8 @@ const DragItems = ({
               />
             ) : image && !imageId[itemId] ? (
               <div className="image-group">
-                {/* <input
-                  value={imgSource}
-                  placeholder="Add image source..."
-                  onChange={handleImgSourceChange}
-                  className="image-input"
-                /> */}
                 <input
+                  name="content"
                   value={list[groupIdx]['items'][itemIdx]['content']}
                   placeholder="Add image source..."
                   onChange={(e) =>
