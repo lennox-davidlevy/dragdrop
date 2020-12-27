@@ -78,6 +78,9 @@ const DragItems = ({
 
                 <div className="button-group">
                   <button
+                    disabled={
+                      list[groupIdx]['items'][itemIdx]['content'].length === 0
+                    }
                     className="icon-button"
                     onClick={(e) => handleSubmitImgSource(e, itemIdx)}
                   >
