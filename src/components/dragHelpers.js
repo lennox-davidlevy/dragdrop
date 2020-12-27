@@ -187,7 +187,6 @@ const returnItems = (
           setImageId={setImageId}
         />
         <div className="button-group">
-          {/* showAddCard && */}
           {optionIdx !== groupIdx && (
             <button
               className="add-card-button"
@@ -236,11 +235,8 @@ export {
   handleDragStartHelper,
   handleDragEnterHelper,
   addCardHelper,
-  // getWordsHelper,
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
   getWords,
 };
-
-//  <Button clickHandler={addGroup} title="Add Group" />;
