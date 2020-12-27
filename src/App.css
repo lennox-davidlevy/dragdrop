@@ -271,3 +271,56 @@ textarea {
   content: 'Placeholder still possible';
   color: gray;
 } */
+
+.taskBar {
+  height: 30px;
+  background-color: rgb(192, 192, 192);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  display: flex;
+  justify-content: space-between;
+}
+.start-nav {
+  width: 85px;
+  font-size: 13px;
+  font-weight: 900;
+  outline: 1px solid #000000;
+  background: #c0c0c0;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 4px 10px;
+  margin-top: 1px;
+}
+
+.right-side-nav {
+  display: flex;
+}
+
+.group-num-nav {
+  width: 85px;
+  font-size: 13px;
+  font-weight: 900;
+  outline: 1px solid #000000;
+  background: #c0c0c0;
+  border-style: solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px 10px;
+  margin-top: 1px;
+}
+
+.login-nav {
+  width: 85px;
+  font-size: 13px;
+  font-weight: 900;
+  outline: 1px solid #000000;
+  background: #c0c0c0;
+  border-style: solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px 10px;
+  margin-top: 1px;
+}

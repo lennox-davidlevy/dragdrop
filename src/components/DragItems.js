@@ -63,6 +63,7 @@ const DragItems = ({
               <img
                 className="photo"
                 src={list[groupIdx]['items'][itemIdx]['content']}
+                alt="uploaded for your board"
               />
             ) : image && !imageId[itemId] ? (
               <div className="image-group">
