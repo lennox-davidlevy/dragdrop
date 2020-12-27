@@ -77,10 +77,16 @@ const DragItems = ({
                 />
 
                 <div className="button-group">
-                  <button onClick={(e) => handleSubmitImgSource(e, itemIdx)}>
+                  <button
+                    className="icon-button"
+                    onClick={(e) => handleSubmitImgSource(e, itemIdx)}
+                  >
                     <i className="fa fa-check"></i>
                   </button>
-                  <button onClick={() => deleteCard(groupIdx, itemIdx)}>
+                  <button
+                    className="icon-button"
+                    onClick={() => deleteCard(groupIdx, itemIdx)}
+                  >
                     <i className="fa fa-window-close"></i>
                   </button>
                 </div>

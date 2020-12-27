@@ -155,14 +155,22 @@ const returnItems = (
         }
         className="drag-group"
       >
-        <input
-          id={`${groupIdx}input`}
-          className="title-text"
-          type="text"
-          value={list[groupIdx]['title']}
-          name="title"
-          onChange={(e) => handleInputChange(e, groupIdx)}
-        />
+        <div className="title-container">
+          <input
+            id={`${groupIdx}input`}
+            className="title-text"
+            type="text"
+            value={list[groupIdx]['title']}
+            name="title"
+            onChange={(e) => handleInputChange(e, groupIdx)}
+          />
+          <button
+            className="delete-group-button"
+            onClick={() => deleteGroup(groupIdx)}
+          >
+            X
+          </button>
+        </div>
         <DragItems
           list={list}
           items={items}
@@ -181,41 +189,47 @@ const returnItems = (
         <div className="button-group">
           {/* showAddCard && */}
           {optionIdx !== groupIdx && (
-            <button onClick={() => handleShowAddCard(groupIdx)}>
+            <button
+              className="add-card-button"
+              onClick={() => handleShowAddCard(groupIdx)}
+            >
               Add Card
             </button>
           )}
           {showOption && optionIdx === groupIdx && (
-            <div>
-              <button onClick={() => addCard(groupIdx, true)}>
+            <>
+              <button
+                className="icon-button"
+                onClick={() => addCard(groupIdx, true)}
+              >
                 <i className="fa fa-image"></i>
               </button>
-              <button onClick={() => addCard(groupIdx, false)}>
+              <button
+                className="icon-button"
+                onClick={() => addCard(groupIdx, false)}
+              >
                 <i className="fa fa-file-text" aria-hidden="true"></i>
               </button>
-            </div>
-          )}
-          {/* <Button clickHandler={addCard} item={groupIdx} title="Add Card" /> */}
-          <Button
-            clickHandler={deleteGroup}
-            item={groupIdx}
-            title="Delete Group"
-          />
-          {groupIdx === list.length - 1 && (
-            <Button clickHandler={addGroup} title="Add Group" />
+            </>
           )}
         </div>
+        {groupIdx === list.length - 1 && (
+          <>
+            <button className="add-card-button" onClick={() => addGroup()}>
+              Add Group
+            </button>
+          </>
+        )}
       </div>
     );
   });
 };
 
 const breakpointColumnsObj = {
-  default: 2,
-  1440: 3,
-  1100: 3,
+  default: 3,
+  1024: 2,
   900: 2,
-  500: 1,
+  525: 1,
 };
 
 export {
@@ -228,3 +242,5 @@ export {
   breakpointColumnsObj,
   getWords,
 };
+
+//  <Button clickHandler={addGroup} title="Add Group" />;
