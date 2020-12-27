@@ -16,24 +16,22 @@ const DragItems = ({
   setImageId,
 }) => {
   const [imgSource, setImgSource] = useState('');
-  const [showImage, setShowImage] = useState(false);
 
-  const handleImgSourceChange = (e) => {
-    setImgSource(e.target.value);
-  };
+  // const handleImgSourceChange = (e) => {
+  //   setImgSource(e.target.value);
+  // };
 
   const handleSubmitImgSource = (e, itemIdx) => {
-    const tempList = JSON.parse(JSON.stringify(list));
-    tempList[groupIdx]['items'][itemIdx] = {
-      ...tempList[groupIdx]['items'][itemIdx],
-      content: imgSource,
-    };
-    console.log(tempList[groupIdx]['items'][itemIdx]['content']);
-    setList(tempList);
+    // const tempList = JSON.parse(JSON.stringify(list));
+    // tempList[groupIdx]['items'][itemIdx] = {
+    //   ...tempList[groupIdx]['items'][itemIdx],
+    //   content: imgSource,
+    // };
+    // console.log(tempList[groupIdx]['items'][itemIdx]['content']);
+    // setList(tempList);
     const tempId = { ...imageId };
-    tempId[tempList[groupIdx]['items'][itemIdx]['id']] = true;
+    tempId[list[groupIdx]['items'][itemIdx]['id']] = true;
     setImageId(tempId);
-    setShowImage(true);
     setImgSource('');
   };
 
@@ -80,13 +78,23 @@ const DragItems = ({
                 className="photo"
                 src={list[groupIdx]['items'][itemIdx]['content']}
               />
-            ) : image ? (
+            ) : image && !imageId[itemId] ? (
               <div className="image-group">
-                <input
+                {/* <input
                   value={imgSource}
                   placeholder="Add image source..."
                   onChange={handleImgSourceChange}
+                  className="image-input"
+                /> */}
+                <input
+                  value={list[groupIdx]['items'][itemIdx]['content']}
+                  placeholder="Add image source..."
+                  onChange={(e) =>
+                    handleInputChange(e, groupIdx, itemIdx, true)
+                  }
+                  className="image-input"
                 />
+
                 <div className="button-group">
                   <button onClick={(e) => handleSubmitImgSource(e, itemIdx)}>
                     <i className="fa fa-check"></i>

@@ -16,8 +16,7 @@ const data = [
         id: uuidv4(),
         title: 'bunny',
         image: true,
-        content:
-          'https://www.ntu.ac.uk/__data/assets/image/0035/884573/Otis-Havana.jpg',
+        content: '',
       },
       {
         id: uuidv4(),

@@ -87,7 +87,7 @@ body {
   padding: 0.5rem 0.5rem;
 }
 
-input {
+.title-text {
   background-color: transparent;
   font-size: medium;
   border: 0px solid;
@@ -144,4 +144,12 @@ textarea {
   /* change div to reference your elements you put in <Masonry> */
   background: rgb(212, 212, 212);
   margin-bottom: 15px;
+}
+
+.image-group {
+  margin-top: 35px;
+}
+.image-input {
+  margin-bottom: 10px;
+  width: 200px;
 }

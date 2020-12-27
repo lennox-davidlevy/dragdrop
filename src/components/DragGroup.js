@@ -104,9 +104,18 @@ const DragGroup = ({ data }) => {
   const deleteGroup = (groupIdx) => {
     let newList = JSON.parse(JSON.stringify(list));
     newList.splice(groupIdx, 1);
+    const tempRandomWord = [...randomWord];
+    let word;
+    if (tempRandomWord.length > 0) {
+      const tempWord = tempRandomWord.pop();
+      word = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+      setRandomWord(tempRandomWord);
+    } else {
+      word = 'Fetch Off';
+    }
     let newGroup = {
-      id: '2',
-      title: 'new group',
+      id: uuidv4(),
+      title: `Group ${word}`,
       items: [],
     };
     if (newList.length === 0) {
@@ -125,13 +134,20 @@ const DragGroup = ({ data }) => {
     setList(tempList);
   };
 
-  const handleItemInputChange = (e, index, itemIndex) => {
+  const handleItemInputChange = (e, index, itemIndex, imageChange) => {
     const { name, value } = e.target;
     const tempList = JSON.parse(JSON.stringify(list));
-    tempList[index]['items'][itemIndex] = {
-      ...tempList[index]['items'][itemIndex],
-      [name]: value,
-    };
+    if (imageChange) {
+      tempList[index]['items'][itemIndex] = {
+        ...tempList[index]['items'][itemIndex],
+        ['content']: value,
+      };
+    } else {
+      tempList[index]['items'][itemIndex] = {
+        ...tempList[index]['items'][itemIndex],
+        [name]: value,
+      };
+    }
     setList(tempList);
   };
 
