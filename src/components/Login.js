@@ -5,6 +5,7 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
   const initialState = { email: '', password: '' };
   const [formData, setFormData] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
+  const [signUp, setSignUp] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,8 +16,10 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
     setFormData(initialState);
   };
 
-  const handleCancel = () => {
-    const resetLogin = document.getElementById('login-nav');
+  const handleCancel = (e, name) => {
+    e.preventDefault();
+    setSignUp(false);
+    const resetLogin = document.getElementById(name);
     resetLogin.classList.remove('clicked');
     setShowForm(false);
   };
@@ -42,6 +45,7 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
       {showForm && (
         <div className="login-form">
           <form className="login-container">
+            <div className="login-title">{signUp ? 'Sign Up' : 'Login'}</div>
             <input
               name="email"
               value={formData.email}
@@ -58,7 +62,7 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
             />
             <div className="login-button-group">
               <button
-                className="submit-button"
+                className="login-button"
                 onClick={(e) => handleSubmit(e)}
                 disabled={
                   formData.email.length === 0 || formData.password.length === 0
@@ -66,7 +70,17 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
               >
                 Submit
               </button>
-              <button className="cancel-button" onClick={() => handleCancel()}>
+              <button
+                type="button"
+                className="login-button"
+                onClick={() => setSignUp(!signUp)}
+              >
+                {signUp ? 'Login' : 'Sign Up'}
+              </button>
+              <button
+                className="login-button"
+                onClick={(e) => handleCancel(e, 'login-nav')}
+              >
                 Cancel
               </button>
             </div>
