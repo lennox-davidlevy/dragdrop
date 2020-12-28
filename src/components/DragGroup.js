@@ -35,7 +35,6 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   }, [newGroupCheck, list.length]);
 
   useEffect(() => {
-    console.log('add image id effect ran');
     let dict = handleImageId(list);
     setImageId(dict);
   }, []);
