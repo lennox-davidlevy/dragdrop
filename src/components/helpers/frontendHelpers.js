@@ -120,11 +120,11 @@ const returnItems = (
 ) => {
   return list.map((item, groupIdx) => {
     const { items } = item;
+
     const groupId = item.id;
     return (
       <div
         key={groupIdx}
-        // id={groupId}
         onDragEnter={
           current && !item.items.length
             ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
@@ -210,6 +210,19 @@ const breakpointColumnsObj = {
   525: 1,
 };
 
+const handleImageId = (list) => {
+  let dict = {};
+  for (let i = 0; i < list.length; i++) {
+    const groupItems = list[i].items;
+    groupItems.forEach((item) => {
+      if (item.image) {
+        dict = { ...dict, [item.id]: true };
+      }
+    });
+  }
+  return dict;
+};
+
 export {
   handleDragStartHelper,
   handleDragEnterHelper,
@@ -217,4 +230,5 @@ export {
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
+  handleImageId,
 };
