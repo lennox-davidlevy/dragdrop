@@ -49,7 +49,7 @@ const DragItems = ({
               })
             }
             key={itemIdx}
-            id={itemId}
+            // id={itemId}
             className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
           >
             <div className="grab-bar">
