@@ -26,10 +26,8 @@ router.post(
     check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
-    console.log(`req.body ${JSON.stringify(req.body)}`);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(`errors in auth.js express validator ${errors}`);
       return res.status(400).json({ errors: errors.array() });
     }
     const { email, password } = req.body;
@@ -44,7 +42,6 @@ router.post(
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        console.log(`errors in auth.js isMatch`);
         return res
           .status(400)
           .json({ errors: [{ msg: 'Incorrect Username or Password' }] });
