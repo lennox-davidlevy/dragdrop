@@ -303,12 +303,12 @@ textarea {
 
 .group-num-nav {
   width: 85px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
-  border-color: #808080 #ffffff #ffffff #808080;
+  border-color: #ffffff #808080 #808080 #ffffff;
   padding: 4px 10px;
   margin-top: 1px;
 }
@@ -320,7 +320,58 @@ textarea {
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
-  border-color: #808080 #ffffff #ffffff #808080;
+  border-color: #ffffff #808080 #808080 #ffffff;
   padding: 4px 10px;
   margin-top: 1px;
+  cursor: pointer;
+}
+
+.clicked {
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.login-form {
+  float: right;
+  border-width: 1px;
+  border-style: solid;
+  width: 220px;
+  height: 86px;
+  background: #c0c0c0;
+  position: absolute;
+  top: 31px;
+  right: 1px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 1px 2px;
+}
+
+.login-container {
+  margin-top: 16px;
+}
+
+.cancel-button {
+  margin: 2px 2px 2px 0;
+  border-width: 1px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: Tahoma;
+  text-align: center;
+  min-width: 13px;
+}
+
+.submit-button {
+  margin: 2px 2px 2px 0;
+  border-width: 1px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: Tahoma;
+  text-align: center;
+  min-width: 13px;
+}
+
+.login-button-group {
+  margin-top: 3px;
 }
