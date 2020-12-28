@@ -226,8 +226,10 @@ const returnItems = (
 
 const breakpointColumnsObj = {
   default: 3,
-  1024: 2,
-  900: 2,
+  1400: 4,
+  1299: 3,
+  999: 2,
+  765: 1,
   525: 1,
 };
 
