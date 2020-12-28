@@ -4,13 +4,14 @@ const connectDB = require('../config/db');
 
 connectDB();
 const app = express();
-app.use(express.json({ extended: true }));
+
+app.use(express.json({ extended: false }));
 
 app.get('/', (req, res) => {
   res.send('API Running');
 });
 
-app.use('/login', require('./routes/user'));
+app.use('/user', require('./routes/user'));
 app.use('/randomWord', require('./routes/randomWord'));
 
 app.listen(PORT, () => {

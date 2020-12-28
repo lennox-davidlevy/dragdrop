@@ -4,7 +4,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+// POST /user
+
 router.post('/', async (req, res) => {
+  console.log(req.body);
   try {
     res.status(200).send('router post works');
   } catch (err) {
