@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './Login';
 
-const NavBar = ({ numberOfGroups }) => {
+const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseDown = (e) => {
     e.target.classList.add('clicked');
   };
@@ -21,6 +21,8 @@ const NavBar = ({ numberOfGroups }) => {
         <Login
           handleMouseDown={handleMouseDown}
           handleMouseUp={handleMouseUp}
+          setShowErrorMessage={setShowErrorMessage}
+          setErrorMessages={setErrorMessages}
         />
         {numberOfGroups === 1 ? (
           <div className="group-num-nav">{numberOfGroups} Group</div>

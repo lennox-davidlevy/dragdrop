@@ -9,8 +9,8 @@ import {
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
-  getWords,
-} from './dragHelpers';
+} from './helpers/frontendHelpers.js';
+import { getWords } from './helpers/backendHelpers';
 import { v4 as uuidv4 } from 'uuid';
 
 const DragGroup = ({ data, setNumberOfGroups }) => {
