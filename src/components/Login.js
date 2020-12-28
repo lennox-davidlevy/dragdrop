@@ -1,15 +1,36 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { loginAuthentication, registerUser } from './helpers/backendHelpers';
 
-const Login = ({ handleMouseDown, handleMouseUp }) => {
+const Login = ({
+  handleMouseDown,
+  handleMouseUp,
+  setShowErrorMessage,
+  setErrorMessages,
+}) => {
   const initialState = { email: '', password: '' };
   const [formData, setFormData] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
   const [signUp, setSignUp] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     //send post to server
+    try {
+      let result;
+      signUp
+        ? (result = await registerUser(formData))
+        : (result = await loginAuthentication(formData));
+      if (result.errors) {
+        const errorMessages = result.errors.map((err) => {
+          return err.msg;
+        });
+        setShowErrorMessage(true);
+        setErrorMessages(errorMessages);
+        return;
+      }
+    } catch (err) {
+      console.log(`clientside err ${err}`);
+    }
     const resetLogin = document.getElementById('login-nav');
     resetLogin.classList.remove('clicked');
     setShowForm(false);
@@ -22,6 +43,8 @@ const Login = ({ handleMouseDown, handleMouseUp }) => {
     const resetLogin = document.getElementById(name);
     resetLogin.classList.remove('clicked');
     setShowForm(false);
+    setShowErrorMessage(false);
+    setFormData(initialState);
   };
 
   const handleChange = (e) => {
