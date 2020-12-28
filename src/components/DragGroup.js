@@ -9,6 +9,7 @@ import {
   addGroupHelper,
   returnItems,
   breakpointColumnsObj,
+  handleImageId,
 } from './helpers/frontendHelpers.js';
 import { getWords } from './helpers/backendHelpers';
 import { v4 as uuidv4 } from 'uuid';
@@ -32,6 +33,12 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
     setNewGroupCheck(false);
     setNumberOfGroups(list.length);
   }, [newGroupCheck, list.length]);
+
+  useEffect(() => {
+    console.log('add image id effect ran');
+    let dict = handleImageId(list);
+    setImageId(dict);
+  }, []);
 
   useEffect(() => {
     getWords(setRandomWord);
