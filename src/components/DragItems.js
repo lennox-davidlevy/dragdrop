@@ -52,12 +52,15 @@ const DragItems = ({
             id={itemId}
             className={current ? getStyles({ groupIdx, itemIdx }) : 'drag-item'}
           >
-            <button
-              className="delete-item"
-              onClick={() => deleteCard(groupIdx, itemIdx)}
-            >
-              X
-            </button>
+            <div className="grab-bar">
+              <span className="grippy"></span>
+              <button
+                className="delete-item"
+                onClick={() => deleteCard(groupIdx, itemIdx)}
+              >
+                X
+              </button>
+            </div>
 
             {image && imageId[itemId] ? (
               <img
