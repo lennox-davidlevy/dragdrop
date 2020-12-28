@@ -22,13 +22,11 @@ const NavBar = ({ numberOfGroups }) => {
           handleMouseDown={handleMouseDown}
           handleMouseUp={handleMouseUp}
         />
-        <div
-          className="group-num-nav"
-          onMouseDown={(e) => handleMouseDown(e)}
-          onMouseUp={(e) => handleMouseUp(e)}
-        >
-          # of Groups: {numberOfGroups}
-        </div>
+        {numberOfGroups === 1 ? (
+          <div className="group-num-nav">{numberOfGroups} Group</div>
+        ) : (
+          <div className="group-num-nav">{numberOfGroups} Groups</div>
+        )}
       </div>
     </div>
   );
