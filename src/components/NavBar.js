@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Account from './Account';
 import Login from './Login';
+import { UserContext } from './UserContext';
 
 const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseDown = (e) => {
@@ -8,6 +10,8 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseUp = (e) => {
     e.target.classList.remove('clicked');
   };
+  const { user, setUser } = useContext(UserContext);
+
   return (
     <div className="taskBar">
       <div
@@ -18,12 +22,20 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
         Thought Board
       </div>
       <div className="right-side-nav">
-        <Login
-          handleMouseDown={handleMouseDown}
-          handleMouseUp={handleMouseUp}
-          setShowErrorMessage={setShowErrorMessage}
-          setErrorMessages={setErrorMessages}
-        />
+        {!user ? (
+          <Login
+            handleMouseDown={handleMouseDown}
+            handleMouseUp={handleMouseUp}
+            setShowErrorMessage={setShowErrorMessage}
+            setErrorMessages={setErrorMessages}
+          />
+        ) : (
+          <Account
+            handleMouseDown={handleMouseDown}
+            handleMouseUp={handleMouseUp}
+          />
+        )}
+
         {numberOfGroups === 1 ? (
           <div className="group-num-nav">{numberOfGroups} Group</div>
         ) : (

@@ -32,8 +32,9 @@ const loginAuthentication = async ({ email, password }) => {
 
   try {
     const res = await axios.post('/auth', body, options);
-    console.log(res.data.token);
-    return res.data.token;
+    localStorage.setItem('token', res.data.token);
+
+    return { email: res.data.payload.user.email };
   } catch (err) {
     const errors = err.response.data;
     return errors;
@@ -49,12 +50,40 @@ const registerUser = async ({ email, password }) => {
   const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post('/user', body, options);
-    console.log(res);
-    return res;
+    localStorage.setItem('token', res.data.token);
+    return { email: res.data.payload.user.email };
   } catch (err) {
     const errors = err.response.data;
     return errors;
   }
 };
 
-export { getWords, loginAuthentication, registerUser };
+const authenticateOnLoad = async (setUser) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    axios.defaults.headers.common['x-auth-token'] = token;
+  } else {
+    delete axios.defaults.headers.common['x-auth-token'];
+    return;
+  }
+  try {
+    const res = await axios.get('/auth');
+    setUser(res.data.email);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const signOut = (setUser) => {
+  localStorage.removeItem('token');
+  delete axios.defaults.headers.common['x-auth-token'];
+  setUser(null);
+};
+
+export {
+  getWords,
+  loginAuthentication,
+  registerUser,
+  authenticateOnLoad,
+  signOut,
+};

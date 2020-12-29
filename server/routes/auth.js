@@ -51,6 +51,7 @@ router.post(
         user: {
           email: user.email,
           id: user.id,
+          boards: user.boards,
         },
       };
 
@@ -60,7 +61,7 @@ router.post(
         { expiresIn: 10000 },
         (err, token) => {
           if (err) throw err;
-          return res.json({ token });
+          return res.json({ token, payload });
         }
       );
     } catch (err) {
