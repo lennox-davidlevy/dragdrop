@@ -10,7 +10,7 @@ const data = [
         id: '123456',
         title: 'random',
         content:
-          'https://www.rd.com/wp-content/uploads/2020/04/GettyImages-694542042-e1586274805503.jpg',
+          'https://i.pinimg.com/564x/3b/1d/36/3b1d363315e1aa820728a7c756688849.jpg',
         image: true,
       },
     ],
@@ -34,7 +34,7 @@ const data = [
         id: '45678',
         title: 'random',
         content:
-          'https://thedisneyblog.com/wp-content/uploads/2020/05/WDW-Porcupette-Shelley-1.jpg',
+          'https://img.buzzfeed.com/buzzfeed-static/static/2014-06/26/18/enhanced/webdr04/enhanced-29284-1403820861-1.jpg?downsize=900:*&output-format=auto&output-quality=auto',
         image: true,
       },
     ],
