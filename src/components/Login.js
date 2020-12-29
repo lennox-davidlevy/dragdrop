@@ -41,7 +41,7 @@ const Login = ({
       }
       setUser(result.email);
     } catch (err) {
-      console.log(`clientside err ${err}`);
+      console.error(`clientside err ${err}`);
     }
     const resetLogin = document.getElementById('login-account-nav');
     resetLogin.classList.remove('clicked');

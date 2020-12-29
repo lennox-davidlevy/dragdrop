@@ -33,6 +33,7 @@ const loginAuthentication = async ({ email, password }) => {
   try {
     const res = await axios.post('/auth', body, options);
     localStorage.setItem('token', res.data.token);
+
     return { email: res.data.payload.user.email };
   } catch (err) {
     const errors = err.response.data;
@@ -66,7 +67,6 @@ const authenticateOnLoad = async (setUser) => {
     return;
   }
   try {
-    console.log('ran');
     const res = await axios.get('/auth');
     setUser(res.data.email);
   } catch (err) {

@@ -51,6 +51,7 @@ router.post(
         user: {
           email: user.email,
           id: user.id,
+          boards: user.boards,
         },
       };
 
