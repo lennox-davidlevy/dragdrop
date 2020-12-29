@@ -50,6 +50,7 @@ const registerUser = async ({ email, password }) => {
   const body = JSON.stringify({ email, password });
   try {
     const res = await axios.post('/user', body, options);
+
     localStorage.setItem('token', res.data.token);
     return { email: res.data.payload.user.email };
   } catch (err) {
@@ -74,10 +75,12 @@ const authenticateOnLoad = async (setUser) => {
   }
 };
 
-const signOut = (setUser) => {
+const signOut = (setUser, setBoard, setShowGroup) => {
   localStorage.removeItem('token');
   delete axios.defaults.headers.common['x-auth-token'];
   setUser(null);
+  setBoard(null);
+  setShowGroup(false);
 };
 
 export {

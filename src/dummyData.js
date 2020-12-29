@@ -41,6 +41,31 @@ const data = [
   },
 ];
 
+const boardData = [
+  {
+    id: uuidv4(),
+    title: 'New Board 1',
+    groups: [
+      {
+        title: 'New Group 1',
+        id: uuidv4(),
+        items: [],
+      },
+    ],
+  },
+  {
+    id: uuidv4(),
+    title: 'New Board 2',
+    groups: [
+      {
+        title: 'New Group 2',
+        id: uuidv4(),
+        items: [],
+      },
+    ],
+  },
+];
+
 //These names come from an API call
 const names = [
   'Deandra_Tara',
@@ -1045,4 +1070,4 @@ const names = [
   'Claris_Ginnie',
 ];
 
-export { data, names };
+export { data, names, boardData };
