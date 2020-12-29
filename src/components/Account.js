@@ -4,7 +4,7 @@ import { UserContext } from './UserContext';
 
 const Account = ({ handleMouseDown, handleMouseUp }) => {
   const [showForm, setShowForm] = useState(false);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setBoard, setShowGroup } = useContext(UserContext);
 
   return (
     <div>
@@ -26,7 +26,7 @@ const Account = ({ handleMouseDown, handleMouseUp }) => {
               <button
                 type="button"
                 className="account-button"
-                onClick={() => signOut(setUser)}
+                onClick={() => signOut(setUser, setBoard, setShowGroup)}
               >
                 Sign Out
               </button>

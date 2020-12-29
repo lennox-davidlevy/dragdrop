@@ -8,6 +8,7 @@
 }
 body {
   background-color: #008080;
+  font-family: Tahoma;
 }
 
 .App-header {
@@ -16,12 +17,15 @@ body {
   /* width: 100vw !important;
   height: 100vh !important; */
   display: flex;
+  justify-content: center;
   color: white;
   /* overflow-anchor: none; */
 }
 
-body {
+/* body {
   font-family: 'Roboto', sans-serif;
+} */
+body {
 }
 
 .drag_drop {
@@ -54,12 +58,6 @@ body {
 .drag-item:not(:last-child) {
   margin-bottom: 0.5rem;
 }
-
-/* .item-title {
-  font-size: large;
-  font-weight: 900;
-  padding: 0.5rem;
-} */
 
 .item-content {
   font-size: 14px;
@@ -178,7 +176,7 @@ body {
   justify-content: space-between;
 }
 
-.title-text {
+/* .title-text {
   margin: 2px 0 0 1px;
   float: left;
   font-family: Tahoma;
@@ -188,7 +186,7 @@ body {
   border: 0px solid;
   color: #fff;
   width: 250px;
-}
+} */
 
 textarea {
   background-color: transparent;
@@ -215,7 +213,7 @@ textarea {
 .start-nav {
   /* width: 85px; */
   font-size: 13px;
-  font-weight: 900;
+  /* font-weight: 900; */
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
@@ -231,7 +229,7 @@ textarea {
 .group-num-nav {
   width: 65px;
   font-size: 12px;
-  font-weight: 900;
+  /* font-weight: 900; */
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
@@ -243,7 +241,7 @@ textarea {
 .login-account-nav {
   width: 85px;
   font-size: 13px;
-  font-weight: 900;
+  /* font-weight: 900; */
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
@@ -281,7 +279,7 @@ textarea {
   border-color: #ffffff #808080 #808080 #ffffff;
   padding: 3px;
   font-size: 11px;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-family: Tahoma;
   text-align: center;
   width: 55px;
@@ -295,7 +293,7 @@ textarea {
 .login-title {
   font-size: 13px;
   font-family: Tahoma;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .grab-bar {
@@ -407,7 +405,7 @@ button {
   border-color: #ffffff #808080 #808080 #ffffff;
   padding: 3px;
   font-size: 11px;
-  font-weight: bold;
+  /* font-weight: bold; */
   font-family: Tahoma;
   text-align: center;
   width: 60px;
@@ -416,4 +414,15 @@ button {
 .account-title {
   font-size: small;
   margin-bottom: 25px;
+}
+
+.welcome-container {
+  width: 400px;
+  background: white;
+  height: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  color: black;
 }
