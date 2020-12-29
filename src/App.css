@@ -240,7 +240,7 @@ textarea {
   margin-top: 1px;
 }
 
-.login-nav {
+.login-account-nav {
   width: 85px;
   font-size: 13px;
   font-weight: 900;
@@ -262,7 +262,7 @@ textarea {
   border-width: 1px;
   border-style: solid;
   width: 200px;
-  height: 90px;
+  /* height: 90px; */
   background: #c0c0c0;
   position: absolute;
   top: 31px;
@@ -289,6 +289,7 @@ textarea {
 
 .login-button-group {
   margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .login-title {
@@ -398,4 +399,21 @@ button {
 
 .message-icon {
   margin-right: 24px;
+}
+
+.account-button {
+  margin: 2px 2px 2px 0;
+  border-width: 1px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  font-size: 11px;
+  font-weight: bold;
+  font-family: Tahoma;
+  text-align: center;
+  width: 60px;
+}
+
+.account-title {
+  font-size: small;
+  margin-bottom: 25px;
 }

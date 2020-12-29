@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { loginAuthentication, registerUser } from './helpers/backendHelpers';
+import { UserContext } from './UserContext';
 
 const Login = ({
   handleMouseDown,
@@ -7,19 +8,29 @@ const Login = ({
   setShowErrorMessage,
   setErrorMessages,
 }) => {
-  const initialState = { email: '', password: '' };
+  const initialState = { email: '', password: '', password2: '' };
   const [formData, setFormData] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
   const [signUp, setSignUp] = useState(false);
+  const { setUser } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     //send post to server
+    const { email, password, password2 } = formData;
     try {
       let result;
-      signUp
-        ? (result = await registerUser(formData))
-        : (result = await loginAuthentication(formData));
+      if (signUp) {
+        if (password !== password2) {
+          setShowErrorMessage(true);
+          setErrorMessages(['Password does not match']);
+          return;
+        }
+        result = await registerUser({ email, password });
+      } else {
+        result = await loginAuthentication({ email, password });
+      }
+
       if (result.errors) {
         const errorMessages = result.errors.map((err) => {
           return err.msg;
@@ -28,10 +39,11 @@ const Login = ({
         setErrorMessages(errorMessages);
         return;
       }
+      setUser(result.email);
     } catch (err) {
       console.log(`clientside err ${err}`);
     }
-    const resetLogin = document.getElementById('login-nav');
+    const resetLogin = document.getElementById('login-account-nav');
     resetLogin.classList.remove('clicked');
     setShowForm(false);
     setFormData(initialState);
@@ -57,8 +69,8 @@ const Login = ({
   return (
     <div>
       <div
-        id="login-nav"
-        className="login-nav"
+        id="login-account-nav"
+        className="login-account-nav"
         onMouseDown={(e) => handleMouseDown(e)}
         onClick={() => setShowForm(true)}
       >
@@ -74,15 +86,24 @@ const Login = ({
               value={formData.email}
               type="email"
               onChange={(e) => handleChange(e)}
-              placeholder="Enter Email..."
+              placeholder="Email..."
             />
             <input
               name="password"
               value={formData.password}
               type="password"
               onChange={(e) => handleChange(e)}
-              placeholder="Enter Password..."
+              placeholder="Password..."
             />
+            {signUp && (
+              <input
+                name="password2"
+                value={formData.password2}
+                type="password"
+                onChange={(e) => handleChange(e)}
+                placeholder="Repeat Password..."
+              />
+            )}
             <div className="login-button-group">
               <button
                 className="login-button"
@@ -102,7 +123,7 @@ const Login = ({
               </button>
               <button
                 className="login-button"
-                onClick={(e) => handleCancel(e, 'login-nav')}
+                onClick={(e) => handleCancel(e, 'login-account-nav')}
               >
                 Cancel
               </button>

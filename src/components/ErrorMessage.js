@@ -17,8 +17,8 @@ const ErrorMessage = ({ errorMessages, setShowErrorMessage }) => {
         <div className="message-contents">
           <img className="message-icon" src={errorIcon} alt="error" />
           <ul className="message-list">
-            {errorMessages.map((message) => {
-              return <li>{message}</li>;
+            {errorMessages.map((message, key) => {
+              return <li key={key}>{message}</li>;
             })}
           </ul>
         </div>
