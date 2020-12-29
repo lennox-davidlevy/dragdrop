@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import DragGroup from './DragGroup';
 import { UserContext } from './UserContext';
 
 const BoardsFolder = () => {
