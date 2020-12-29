@@ -10,7 +10,7 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseUp = (e) => {
     e.target.classList.remove('clicked');
   };
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div className="taskBar">

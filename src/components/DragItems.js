@@ -25,7 +25,7 @@ const DragItems = ({
     <div>
       {items.map((item, itemIdx) => {
         const itemId = item.id;
-        const image = item.image;
+        const { image, title } = item;
         return (
           <div
             onDragEnter={
@@ -54,6 +54,14 @@ const DragItems = ({
           >
             <div className="grab-bar">
               <span className="grippy"></span>
+              {image && (
+                <input
+                  name="title"
+                  className="item-title"
+                  value={title}
+                  onChange={(e) => handleInputChange(e, groupIdx, itemIdx)}
+                />
+              )}
               <button
                 className="delete-item"
                 onClick={() => deleteCard(groupIdx, itemIdx)}

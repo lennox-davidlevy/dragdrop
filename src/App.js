@@ -1,11 +1,10 @@
 import './App.css';
 import React, { useState, useMemo, useEffect } from 'react';
-import { data, boardData } from './dummyData';
+import { boardData } from './dummyData';
 import DragGroup from './components/DragGroup';
 import NavBar from './components/NavBar';
 import ErrorMessage from './components/ErrorMessage';
 import { UserContext } from './components/UserContext';
-import axios from 'axios';
 import { authenticateOnLoad } from './components/helpers/backendHelpers';
 import Welcome from './components/Welcome';
 
