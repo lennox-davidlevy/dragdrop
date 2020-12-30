@@ -1,12 +1,13 @@
 import './App.css';
 import React, { useState, useMemo, useEffect } from 'react';
 import { boardData } from './dummyData';
+import { authenticateOnLoad } from './components/helpers/backendHelpers';
 import DragGroup from './components/DragGroup';
 import NavBar from './components/NavBar';
 import ErrorMessage from './components/ErrorMessage';
-import { UserContext } from './components/UserContext';
-import { authenticateOnLoad } from './components/helpers/backendHelpers';
 import Welcome from './components/Welcome';
+import recycleIcon from './img/recycleBin.png';
+import { UserContext } from './components/UserContext';
 
 const App = () => {
   const [numberOfGroups, setNumberOfGroups] = useState(0);
@@ -52,6 +53,9 @@ const App = () => {
               setNumberOfGroups={setNumberOfGroups}
             />
           )}
+        </div>
+        <div className="desktop-icons">
+          <img className="recyle" src={recycleIcon} />
         </div>
       </UserContext.Provider>
     </div>

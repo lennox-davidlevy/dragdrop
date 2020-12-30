@@ -438,3 +438,9 @@ button {
   margin-top: 100px;
   color: black;
 }
+
+.recyle {
+  position: fixed;
+  top: 85%;
+  left: 3%;
+}
