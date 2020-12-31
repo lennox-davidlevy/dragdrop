@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Account from './Account';
 import Login from './Login';
 import { UserContext } from './UserContext';
+import windowsIcon from '../img/windowsIcon.png';
 
 const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseDown = (e) => {
@@ -16,10 +17,11 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
     <div className="taskBar">
       <div
         className="start-nav"
-        onMouseDown={(e) => handleMouseDown(e)}
-        onMouseUp={(e) => handleMouseUp(e)}
+        // onMouseDown={(e) => handleMouseDown(e)}
+        // onMouseUp={(e) => handleMouseUp(e)}
       >
-        Thought Board
+        <img className="windows-icon" src={windowsIcon} />
+        <span>Board</span>
       </div>
       <div className="board-title">{boardTitle}</div>
       <div className="right-side-nav">
