@@ -27,7 +27,9 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   const dragItem = useRef();
   const dragNode = useRef();
 
-  const { setCurrentBoard } = useContext(UserContext);
+  const { setCurrentBoard, hasChanged, setHasChanged } = useContext(
+    UserContext
+  );
 
   useEffect(() => {
     const loc = `${list.length - 1}input`;
@@ -66,6 +68,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const handleDragEnd = () => {
+    !hasChanged && setHasChanged(true);
     setCurrent(false);
     dragNode.current.removeEventListener('dragend', handleDragEnd);
     dragItem.current = null;
@@ -81,6 +84,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const addCard = (idx, isImage) => {
+    !hasChanged && setHasChanged(true);
     addCardHelper(
       idx,
       isImage,
@@ -93,6 +97,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const deleteCard = (groupIdx, itemIdx) => {
+    !hasChanged && setHasChanged(true);
     let newList = JSON.parse(JSON.stringify(list));
     newList[groupIdx].items.splice(itemIdx, 1);
     setList(newList);
@@ -102,6 +107,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const addGroup = () => {
+    !hasChanged && setHasChanged(true);
     addGroupHelper(
       list,
       randomWord,
@@ -115,6 +121,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const deleteGroup = (groupIdx) => {
+    !hasChanged && setHasChanged(true);
     let newList = JSON.parse(JSON.stringify(list));
     newList.splice(groupIdx, 1);
     const tempRandomWord = [...randomWord];
@@ -141,6 +148,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const handleInputChange = (e, index) => {
+    !hasChanged && setHasChanged(true);
     const { name, value } = e.target;
     const tempList = JSON.parse(JSON.stringify(list));
     tempList[index] = { ...tempList[index], [name]: value };
@@ -148,6 +156,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   };
 
   const handleItemInputChange = (e, index, itemIndex, imageChange) => {
+    !hasChanged && setHasChanged(true);
     const { name, value } = e.target;
     const tempList = JSON.parse(JSON.stringify(list));
     if (imageChange) {
@@ -194,7 +203,7 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   );
 
   return (
-    <div className="drag_drop">
+    <div id="drag_drop" className="drag_drop">
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"

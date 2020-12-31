@@ -53,7 +53,7 @@ const loginAuthentication = async ({ email, password }) => {
   try {
     const res = await axios.post('/auth', body, options);
     localStorage.setItem('token', res.data.token);
-
+    axios.defaults.headers.common['x-auth-token'] = res.data.token;
     return {
       email: res.data.payload.user.email,
       boards: res.data.payload.user.boards,
@@ -75,6 +75,7 @@ const registerUser = async ({ email, password }) => {
     const res = await axios.post('/user', body, options);
 
     localStorage.setItem('token', res.data.token);
+    axios.defaults.headers.common['x-auth-token'] = res.data.token;
     return {
       email: res.data.payload.user.email,
       boards: res.data.payload.user.boards,

@@ -4,7 +4,15 @@ import { UserContext } from './UserContext';
 
 const Account = ({ handleMouseDown, handleMouseUp }) => {
   const [showForm, setShowForm] = useState(false);
-  const { user, setUser, setBoard, setShowGroup } = useContext(UserContext);
+  const { user, setUser, setBoard, setShowGroup, hasChanged } = useContext(
+    UserContext
+  );
+
+  const goBack = () => {
+    if (hasChanged) {
+      console.log('WAIT! DONT GO');
+    }
+  };
 
   return (
     <div>
@@ -12,7 +20,7 @@ const Account = ({ handleMouseDown, handleMouseUp }) => {
         id="login-account-nav"
         className="login-account-nav"
         onMouseDown={(e) => handleMouseDown(e)}
-        onClick={() => setShowForm(true)}
+        onClick={() => setShowForm(!showForm)}
       >
         Account
       </div>
@@ -21,6 +29,13 @@ const Account = ({ handleMouseDown, handleMouseUp }) => {
         <div className="login-form">
           <form className="login-container">
             <div className="account-title">{`Welcome, ${user}`}</div>
+            <div
+              type="button"
+              className="account-button"
+              onClick={() => setShowGroup(false)}
+            >
+              Your Boards!
+            </div>
 
             <div className="login-button-group">
               <button

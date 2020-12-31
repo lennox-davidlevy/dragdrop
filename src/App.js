@@ -24,6 +24,8 @@ const App = () => {
   const [currentBoard, setCurrentBoard] = useState(null);
   const [boardTitle, setBoardtitle] = useState('');
   const [showGroup, setShowGroup] = useState(false);
+  const [hasChanged, setHasChanged] = useState(false);
+  const [areSure, setAreSure] = useState(false);
   const providerValue = useMemo(
     () => ({
       user,
@@ -35,6 +37,8 @@ const App = () => {
       currentBoard,
       setCurrentBoard,
       boardTitle,
+      hasChanged,
+      setHasChanged,
     }),
     [user, setUser, boards]
   );
@@ -44,12 +48,31 @@ const App = () => {
   }, []);
 
   const saveBoard = () => {
-    const newBoard = {
-      title: 'Brand New Board',
-      groups: currentBoard,
-    };
-    saveBoardHelper(newBoard, setBoards);
-    setShowGroup(!showGroup);
+    const a = document.getElementById('drag_drop');
+    if (a === null) {
+      return;
+    }
+    const tempBoards = JSON.parse(JSON.stringify(boards));
+    tempBoards[board] = currentBoard;
+    console.log(tempBoards);
+    a.classList.add('collapse');
+    setHasChanged(false);
+
+    if (!hasChanged) {
+      console.log('nothing changed!');
+      setTimeout(() => {
+        setShowGroup(!showGroup);
+      }, 285);
+      return;
+    }
+    setTimeout(() => {
+      const newBoard = {
+        title: 'Brand New Board',
+        groups: currentBoard,
+      };
+      saveBoardHelper(newBoard, setBoards);
+      setShowGroup(!showGroup);
+    }, 285);
   };
 
   return (
