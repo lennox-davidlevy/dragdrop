@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import DragItems from './DragItems';
 import Button from './Button';
 import Masonry from 'react-masonry-css';
@@ -13,6 +13,7 @@ import {
 } from './helpers/frontendHelpers.js';
 import { getWords } from './helpers/backendHelpers';
 import { v4 as uuidv4 } from 'uuid';
+import { UserContext } from './UserContext';
 
 const DragGroup = ({ data, setNumberOfGroups }) => {
   const [list, setList] = useState(data);
@@ -25,6 +26,8 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   const [imageId, setImageId] = useState({});
   const dragItem = useRef();
   const dragNode = useRef();
+
+  const { setCurrentBoard } = useContext(UserContext);
 
   useEffect(() => {
     const loc = `${list.length - 1}input`;
@@ -42,6 +45,10 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   useEffect(() => {
     getWords(setRandomWord);
   }, []);
+
+  useEffect(() => {
+    setCurrentBoard(list);
+  }, [list]);
 
   const handleDragStart = (e, params) => {
     handleDragStartHelper(

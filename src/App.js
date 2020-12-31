@@ -1,12 +1,17 @@
 import './App.css';
 import React, { useState, useMemo, useEffect } from 'react';
-import { boardData } from './dummyData';
-import { authenticateOnLoad } from './components/helpers/backendHelpers';
+
+// import { boardData } from './dummyData';
+import {
+  authenticateOnLoad,
+  saveBoardHelper,
+} from './components/helpers/backendHelpers';
 import DragGroup from './components/DragGroup';
 import NavBar from './components/NavBar';
 import ErrorMessage from './components/ErrorMessage';
 import Welcome from './components/Welcome';
 import recycleIcon from './img/recycleBin.png';
+import diskBlueIcon from './img/diskBlue.png';
 import { UserContext } from './components/UserContext';
 
 const App = () => {
@@ -14,17 +19,38 @@ const App = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [user, setUser] = useState(null);
-  const [boards, setBoards] = useState(boardData);
+  const [boards, setBoards] = useState([]);
   const [board, setBoard] = useState(null);
+  const [currentBoard, setCurrentBoard] = useState(null);
+  const [boardTitle, setBoardtitle] = useState('');
   const [showGroup, setShowGroup] = useState(false);
   const providerValue = useMemo(
-    () => ({ user, setUser, boards, setBoard, setShowGroup }),
+    () => ({
+      user,
+      setUser,
+      boards,
+      setBoard,
+      setBoards,
+      setShowGroup,
+      currentBoard,
+      setCurrentBoard,
+      boardTitle,
+    }),
     [user, setUser, boards]
   );
 
   useEffect(() => {
-    authenticateOnLoad(setUser);
+    authenticateOnLoad(setUser, setBoards);
   }, []);
+
+  const saveBoard = () => {
+    const newBoard = {
+      title: 'Brand New Board',
+      groups: currentBoard,
+    };
+    saveBoardHelper(newBoard, setBoards);
+    setShowGroup(!showGroup);
+  };
 
   return (
     <div className="App">
@@ -55,7 +81,11 @@ const App = () => {
           )}
         </div>
         <div className="desktop-icons">
-          <img className="recyle" src={recycleIcon} />
+          <img
+            onClick={() => saveBoard()}
+            className="recyle"
+            src={diskBlueIcon}
+          />
         </div>
       </UserContext.Provider>
     </div>

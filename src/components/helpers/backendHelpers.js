@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 //WITHOUT NODE
 // const getWords = (setRandomWord) => {
@@ -22,6 +23,25 @@ const getWords = async (setRandomWord) => {
   }
 };
 
+const myFirstBoard = {
+  id: uuidv4(),
+  title: 'My First Board!',
+  groups: [
+    {
+      id: uuidv4(),
+      title: 'My First Group!',
+      items: [
+        {
+          id: uuidv4(),
+          title: '',
+          image: false,
+          content: 'My First Card!',
+        },
+      ],
+    },
+  ],
+};
+
 const loginAuthentication = async ({ email, password }) => {
   const options = {
     headers: {
@@ -34,7 +54,10 @@ const loginAuthentication = async ({ email, password }) => {
     const res = await axios.post('/auth', body, options);
     localStorage.setItem('token', res.data.token);
 
-    return { email: res.data.payload.user.email };
+    return {
+      email: res.data.payload.user.email,
+      boards: res.data.payload.user.boards,
+    };
   } catch (err) {
     const errors = err.response.data;
     return errors;
@@ -47,19 +70,22 @@ const registerUser = async ({ email, password }) => {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify({ email, password });
+  const body = JSON.stringify({ email, password, myFirstBoard });
   try {
     const res = await axios.post('/user', body, options);
 
     localStorage.setItem('token', res.data.token);
-    return { email: res.data.payload.user.email };
+    return {
+      email: res.data.payload.user.email,
+      boards: res.data.payload.user.boards,
+    };
   } catch (err) {
     const errors = err.response.data;
     return errors;
   }
 };
 
-const authenticateOnLoad = async (setUser) => {
+const authenticateOnLoad = async (setUser, setBoards) => {
   const token = localStorage.getItem('token');
   if (token) {
     axios.defaults.headers.common['x-auth-token'] = token;
@@ -70,6 +96,7 @@ const authenticateOnLoad = async (setUser) => {
   try {
     const res = await axios.get('/auth');
     setUser(res.data.email);
+    setBoards(res.data.boards);
   } catch (err) {
     console.error(err);
   }
@@ -83,10 +110,27 @@ const signOut = (setUser, setBoard, setShowGroup) => {
   setShowGroup(false);
 };
 
+const saveBoardHelper = async (board, setBoards) => {
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+  const body = JSON.stringify(board);
+  try {
+    const res = await axios.post('/boards', body, options);
+    setBoards(res.data);
+  } catch (err) {
+    const errors = err.response.data;
+    return errors;
+  }
+};
+
 export {
   getWords,
   loginAuthentication,
   registerUser,
   authenticateOnLoad,
   signOut,
+  saveBoardHelper,
 };

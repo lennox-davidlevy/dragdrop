@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 app.use('/user', require('./routes/user'));
 app.use('/randomWord', require('./routes/randomWord'));
 app.use('/auth', require('./routes/auth'));
-
+app.use('/boards', require('./routes/boards'));
 app.listen(PORT, () => {
   console.log(`server started on ${PORT}...`);
 });

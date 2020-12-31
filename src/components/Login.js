@@ -12,7 +12,7 @@ const Login = ({
   const [formData, setFormData] = useState(initialState);
   const [showForm, setShowForm] = useState(false);
   const [signUp, setSignUp] = useState(false);
-  const { setUser } = useContext(UserContext);
+  const { setUser, setBoards } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,6 +40,7 @@ const Login = ({
         return;
       }
       setUser(result.email);
+      setBoards(result.boards);
     } catch (err) {
       console.error(`clientside err ${err}`);
     }
