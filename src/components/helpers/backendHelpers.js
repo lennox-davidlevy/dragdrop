@@ -23,6 +23,24 @@ const getWords = async (setRandomWord) => {
   }
 };
 
+const checkForDupes = (boards, str) => {
+  const dict = {};
+  for (let i = 0; i < boards.length; i++) {
+    let title = boards[i].title;
+    let temp = title.substr(0, title.indexOf('('));
+    temp = temp || title;
+    dict[temp] = dict[temp] + 1 || 1;
+  }
+  console.log(dict);
+  let newTitle;
+  if (dict[str]) {
+    newTitle = `${str}(${dict[str] + 1})`;
+  } else {
+    newTitle = str;
+  }
+  return newTitle;
+};
+
 const myFirstBoard = {
   id: uuidv4(),
   title: 'My First Board!',
@@ -40,6 +58,27 @@ const myFirstBoard = {
       ],
     },
   ],
+};
+
+const templateBoard = function (str) {
+  return {
+    id: uuidv4(),
+    title: str,
+    groups: [
+      {
+        id: uuidv4(),
+        title: 'New Group',
+        items: [
+          {
+            id: uuidv4(),
+            title: '',
+            image: false,
+            content: 'New Card',
+          },
+        ],
+      },
+    ],
+  };
 };
 
 const loginAuthentication = async ({ email, password }) => {
@@ -111,13 +150,14 @@ const signOut = (setUser, setBoard, setShowGroup) => {
   setShowGroup(false);
 };
 
-const saveBoardHelper = async (board, setBoards) => {
+const saveBoardHelper = async (setBoards, tempBoards) => {
   const options = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  const body = JSON.stringify(board);
+  // const body = JSON.stringify(board);
+  const body = JSON.stringify(tempBoards);
   try {
     const res = await axios.post('/boards', body, options);
     setBoards(res.data);
@@ -134,4 +174,6 @@ export {
   authenticateOnLoad,
   signOut,
   saveBoardHelper,
+  templateBoard,
+  checkForDupes,
 };

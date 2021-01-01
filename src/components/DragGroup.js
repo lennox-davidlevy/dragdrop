@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from './UserContext';
 
 const DragGroup = ({ data, setNumberOfGroups }) => {
-  const [list, setList] = useState(data);
+  const [list, setList] = useState(data['groups']);
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
   const [randomWord, setRandomWord] = useState([]);
@@ -27,9 +27,13 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
   const dragItem = useRef();
   const dragNode = useRef();
 
-  const { setCurrentBoard, hasChanged, setHasChanged } = useContext(
-    UserContext
-  );
+  const {
+    setCurrentBoard,
+    hasChanged,
+    setHasChanged,
+    boardTitle,
+    setBoardTitle,
+  } = useContext(UserContext);
 
   useEffect(() => {
     const loc = `${list.length - 1}input`;
@@ -81,6 +85,11 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
       return 'current drag-item';
     }
     return 'drag-item';
+  };
+
+  const handleTitleChange = (e) => {
+    !hasChanged && setHasChanged(true);
+    setBoardTitle(e.target.value);
   };
 
   const addCard = (idx, isImage) => {
@@ -204,6 +213,9 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
 
   return (
     <div id="drag_drop" className="drag_drop">
+      <div>
+        <input value={boardTitle} onChange={(e) => handleTitleChange(e)} />
+      </div>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className="my-masonry-grid"
