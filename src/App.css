@@ -217,7 +217,7 @@ textarea {
   height: 30px;
   background-color: rgb(192, 192, 192);
   position: absolute;
-  top: 0px;
+  bottom: 0px;
   left: 0px;
   right: 0px;
   border-width: 1px;
@@ -237,12 +237,80 @@ textarea {
   padding: 4px 10px;
   margin-top: 1px;
   display: flex;
+  cursor: pointer;
+}
+
+.start-menu-container {
+  float: left;
+  border-width: 1px;
+  border-style: solid;
+  width: 200px;
+  /* height: 90px; */
+  background: #c0c0c0;
+  position: absolute;
+  bottom: 33px;
+  left: 0px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 1px 2px;
+  width: 171px;
+  text-align: left;
+}
+
+.menu-item {
+  color: black;
+  height: 32px;
+  width: 134px;
+  margin-left: 24px;
+  padding-left: 10px;
+  padding-top: 10px;
+  vertical-align: central;
+  cursor: pointer;
+}
+.menu-item:hover {
+  background-color: rgb(0, 0, 128);
+  color: white;
+}
+.menu-item::first-letter {
+  text-decoration: underline;
+}
+
+#left {
+  width: 28px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  background-color: rgb(128, 128, 128);
+}
+
+#left .b {
+  color: rgb(192, 192, 192);
+  transform: rotateZ(-90deg);
+  transform-origin: center left;
+  display: inline-block;
+  width: 200px;
+  white-space: nowrap;
+  font-size: 20px;
+  margin-top: 215px;
+  margin-left: 10px;
+}
+#left .num95 {
+  font-weight: 100 !important;
+  color: white;
+}
+
+.divider {
+  height: 1px;
+  border-top: ridge 1px white;
+  border-bottom: ridge 1px grey;
+  margin: 2px;
 }
 
 .windows-icon {
   width: 20px;
   height: 20px;
   margin-right: 4px;
+  pointer-events: none;
 }
 
 .right-side-nav {
@@ -464,6 +532,10 @@ button {
   cursor: pointer;
 }
 
+.desktop-icons > * {
+  text-shadow: 1px 1px black;
+}
+
 .boards-folder {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -481,3 +553,13 @@ button {
   display: block;
   font-size: 11px;
 }
+
+/* .full-screen {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: fixed;
+  z-index: -1;
+} */

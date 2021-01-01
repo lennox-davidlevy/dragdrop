@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Account from './Account';
 import Login from './Login';
+import StartMenu from './StartMenu';
 import { UserContext } from './UserContext';
 import windowsIcon from '../img/windowsIcon.png';
 
@@ -15,14 +16,15 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
 
   return (
     <div className="taskBar">
-      <div
+      {/* <div
         className="start-nav"
         // onMouseDown={(e) => handleMouseDown(e)}
         // onMouseUp={(e) => handleMouseUp(e)}
       >
         <img className="windows-icon" src={windowsIcon} />
         <span>Board</span>
-      </div>
+      </div> */}
+      <StartMenu />
       <div className="right-side-nav">
         {!user ? (
           <Login
