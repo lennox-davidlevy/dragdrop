@@ -16,6 +16,7 @@ import recycleIcon from './img/recycleBin.png';
 import diskBlueIcon from './img/diskBlue.png';
 import emptyFolderIcon from './img/emptyFolder.png';
 import { UserContext } from './components/UserContext';
+import SignIn from './components/SignIn';
 
 const App = () => {
   const [numberOfGroups, setNumberOfGroups] = useState(0);
@@ -29,6 +30,7 @@ const App = () => {
   const [showGroup, setShowGroup] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [areSure, setAreSure] = useState(false);
+  const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
@@ -112,6 +114,11 @@ const App = () => {
       hasChanged,
       setHasChanged,
       addBoard,
+      signIn,
+      setSignIn,
+      showErrorMessage,
+      setShowErrorMessage,
+      setErrorMessages,
     }),
     [user, setUser, boards, boardTitle, setBoardTitle]
   );
@@ -143,6 +150,7 @@ const App = () => {
               setNumberOfGroups={setNumberOfGroups}
             />
           )}
+          {signIn && <SignIn />}
         </div>
         <div className="desktop-icons">
           <div className="save-board-icon-group">
