@@ -82,10 +82,17 @@ const User = require('../../models/User');
 
 router.post('/', auth, async (req, res) => {
   try {
+    // const result = await User.findByIdAndUpdate(
+    //   req.user.id,
+    //   {
+    //     $push: { boards: req.body },
+    //   },
+    //   { new: true }
+    // ).exec();
     const result = await User.findByIdAndUpdate(
       req.user.id,
       {
-        $push: { boards: req.body },
+        boards: req.body,
       },
       { new: true }
     ).exec();

@@ -11,7 +11,7 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
   const handleMouseUp = (e) => {
     e.target.classList.remove('clicked');
   };
-  const { user, boardTitle } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <div className="taskBar">
@@ -23,7 +23,6 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
         <img className="windows-icon" src={windowsIcon} />
         <span>Board</span>
       </div>
-      <div className="board-title">{boardTitle}</div>
       <div className="right-side-nav">
         {!user ? (
           <Login
