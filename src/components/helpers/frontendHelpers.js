@@ -205,6 +205,7 @@ const breakpointColumnsObj = {
   default: 4,
   1500: 4,
   1400: 3,
+  1160: 2,
   999: 2,
   765: 1,
   525: 1,
