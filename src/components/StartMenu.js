@@ -12,6 +12,7 @@ const StartMenu = () => {
     setUser,
     setBoard,
     setShowGroup,
+    addBoard,
   } = useContext(UserContext);
 
   const handleMouseDown = (e) => {
@@ -28,6 +29,20 @@ const StartMenu = () => {
     const startNav = document.getElementById('start-nav');
     startNav.classList.toggle('clicked');
     signOut(setUser, setBoard, setShowGroup);
+    setShowMenu(false);
+  };
+
+  const handleAddBoard = () => {
+    const startNav = document.getElementById('start-nav');
+    startNav.classList.toggle('clicked');
+    addBoard();
+    setShowMenu(false);
+  };
+
+  const handleShowMyBoards = () => {
+    const startNav = document.getElementById('start-nav');
+    startNav.classList.toggle('clicked');
+    setShowGroup(false);
     setShowMenu(false);
   };
   return (
@@ -47,8 +62,12 @@ const StartMenu = () => {
             <div className="b"></div>
           </div>
           <div className="menu-item">About</div>
-          <div className="menu-item">New Board</div>
-          <div className="menu-item">My Boards</div>
+          <div className="menu-item" onClick={() => handleAddBoard()}>
+            New Board
+          </div>
+          <div className="menu-item" onClick={() => handleShowMyBoards()}>
+            My Boards
+          </div>
           <div className="divider"></div>
           {user ? (
             <div onClick={() => handleSignOut()} className="menu-item">

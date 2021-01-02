@@ -12,6 +12,7 @@ import DragGroup from './components/DragGroup';
 import NavBar from './components/NavBar';
 import ErrorMessage from './components/ErrorMessage';
 import Welcome from './components/Welcome';
+import BoardsFolder from './components/BoardsFolder';
 import recycleIcon from './img/recycleBin.png';
 import diskBlueIcon from './img/diskBlue.png';
 import emptyFolderIcon from './img/emptyFolder.png';
@@ -152,13 +153,8 @@ const App = () => {
           {signIn && <SignIn />}
           {areSure && <SaveMessage boardTitle={boardTitle} />}
           {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
-          {!showGroup ? (
-            <Welcome
-              user={user}
-              boards={boards}
-              setNumberOfGroups={setNumberOfGroups}
-            />
-          ) : (
+          {!user ? <Welcome /> : !showGroup ? <BoardsFolder /> : null}
+          {showGroup && (
             <DragGroup
               data={boards[board]}
               setNumberOfGroups={setNumberOfGroups}
