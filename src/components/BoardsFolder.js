@@ -36,7 +36,7 @@ const BoardsFolder = () => {
                 onClick={() => handleClick(key, board.title)}
                 key={key}
               >
-                <img src={emptyFolderIcon} />
+                <img src={emptyFolderIcon} alt="my boards icon" />
                 <span className="caption">{board.title}</span>
               </div>
             ))}
