@@ -530,7 +530,7 @@ button {
 .boards-folder {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 20%;
+  margin-top: 20px;
 }
 
 .folder {
@@ -538,6 +538,7 @@ button {
   display: inline-block;
   text-align: center;
   cursor: pointer;
+  margin-bottom: 25px;
 }
 
 .caption {
@@ -703,6 +704,7 @@ button {
   color: black;
   text-align: left;
   font-family: 'notepad';
+  overflow: scroll;
 }
 
 .notepad-content > * {
@@ -711,4 +713,47 @@ button {
 
 .welcome-buttons {
   cursor: pointer;
+}
+
+/* .folder-container {
+  width: 500px;
+  height: 500px;
+  background: white;
+} */
+
+.folder-container .title-container {
+  background-color: #7f7f7f;
+}
+
+.folder-container .title-text {
+  color: #bfbfbf;
+  font-size: 12px;
+}
+
+.boards-folder-bottom-bar {
+  display: flex;
+  flex-direction: row;
+  color: black;
+  font-family: Tahoma;
+  font-size: 10px;
+  background: #bfbfbf;
+  padding: 2px;
+}
+
+.board-folder-bottom-left {
+  text-align: left;
+  font-family: 'windows';
+  width: 70%;
+  padding: 2px;
+  border: 2px solid;
+  border-color: #808080 #808080 #ffffff #ffffff;
+}
+
+.board-folder-bottom-right {
+  text-align: left;
+  font-family: 'windows';
+  width: 30%;
+  padding: 2px;
+  border: 2px solid;
+  border-color: #808080 #808080 #ffffff #ffffff;
 }
