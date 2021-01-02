@@ -1,6 +1,12 @@
 @font-face {
-  font-family: 'Windows';
+  font-family: 'windows';
   src: url('./img/windows.ttf') format('truetype');
+  src: url('./img/windows.woff') format('woff');
+}
+@font-face {
+  font-family: 'notepad';
+  src: url('./img/notepad.ttf') format('truetype');
+  src: url('./img/notepad.woff') format('woff');
 }
 
 .App {
@@ -238,22 +244,6 @@ textarea {
   margin-top: 1px;
   display: flex;
   cursor: pointer;
-}
-
-.start-menu-container {
-  float: left;
-  border-width: 1px;
-  border-style: solid;
-  width: 200px;
-  /* height: 90px; */
-  background: #c0c0c0;
-  position: absolute;
-  bottom: 33px;
-  left: 0px;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  box-shadow: 1px 2px;
-  width: 171px;
-  text-align: left;
 }
 
 .menu-item {
@@ -555,7 +545,23 @@ button {
   font-size: 11px;
 }
 
-/* .full-screen {
+.start-menu-container {
+  float: left;
+  border-width: 1px;
+  border-style: solid;
+  width: 200px;
+  /* height: 90px; */
+  background: #c0c0c0;
+  position: absolute;
+  bottom: 33px;
+  left: 0px;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  box-shadow: 1px 2px;
+  width: 171px;
+  text-align: left;
+}
+
+.full-screen {
   height: 100%;
   width: 100%;
   left: 0;
@@ -563,7 +569,7 @@ button {
   overflow: hidden;
   position: fixed;
   z-index: -1;
-} */
+}
 
 .save-message-button-group {
   display: flex;
@@ -617,6 +623,7 @@ button {
   box-shadow: 1px 2px black;
   font-family: Tahoma;
   font-weight: 100;
+  z-index: 1;
 }
 
 .login-message-button-group {
@@ -662,4 +669,46 @@ button {
 
 .login-block input:focus {
   outline-width: 0;
+}
+
+.notepad-container {
+  position: fixed;
+  top: 15%;
+  left: 32%;
+  background: #bfbfbf;
+  padding: 2px;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+.notepad-icon {
+  display: flex;
+}
+
+.notepad-icon .title-text {
+  font-size: 12px;
+}
+
+.notepad-icon img {
+  height: 20px;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.notepad-content {
+  border: 1px solid black;
+  background: white;
+  height: 379px;
+  width: 400px;
+  color: black;
+  text-align: left;
+  font-family: 'notepad';
+}
+
+.notepad-content > * {
+  padding: 10px;
+}
+
+.welcome-buttons {
+  cursor: pointer;
 }

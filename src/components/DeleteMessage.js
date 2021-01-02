@@ -10,19 +10,11 @@ const DeleteMessage = ({ boardTitle }) => {
   const handleDelete = () => {
     setAreSureDelete(false);
     deleteBoard();
-    console.log('Delete and Close');
   };
 
   const handleCloseWithoutDeleting = () => {
     setAreSureDelete(false);
-
-    console.log('Close without saving');
   };
-
-  // const handleCancel = () => {
-  //   setAreSure(false);
-  //   console.log('Close without saving');
-  // };
 
   return (
     <div className="error-message-container">

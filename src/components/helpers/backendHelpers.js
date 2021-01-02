@@ -31,7 +31,7 @@ const checkForDupes = (boards, str) => {
     temp = temp || title;
     dict[temp] = dict[temp] + 1 || 1;
   }
-  console.log(dict);
+
   let newTitle;
   if (dict[str]) {
     newTitle = `${str}(${dict[str] + 1})`;

@@ -36,6 +36,7 @@ const App = () => {
   const [areSure, setAreSure] = useState(false);
   const [areSureDelete, setAreSureDelete] = useState(false);
   const [signIn, setSignIn] = useState(false);
+  const [startSignUp, setStartSignUp] = useState(false);
 
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
@@ -49,13 +50,14 @@ const App = () => {
   const saveBoard = () => {
     const a = document.getElementById('drag_drop');
     if (a === null) {
+      setShowGroup(false);
       return;
     }
     a.classList.add('collapse');
     const tempBoards = JSON.parse(JSON.stringify(boards));
     if (!hasChanged) {
       setTimeout(() => {
-        setShowGroup(!showGroup);
+        setShowGroup(false);
       }, 285);
       return;
     }
@@ -69,7 +71,7 @@ const App = () => {
     tempBoards[board] = newBoard;
     setTimeout(() => {
       saveBoardHelper(setBoards, tempBoards);
-      setShowGroup(!showGroup);
+      setShowGroup(false);
     }, 285);
     setNewBoardAdded(false);
   };
@@ -115,6 +117,7 @@ const App = () => {
       setBoard,
       setBoards,
       setShowGroup,
+      showGroup,
       currentBoard,
       setCurrentBoard,
       boardTitle,
@@ -131,8 +134,19 @@ const App = () => {
       saveBoard,
       deleteBoard,
       setAreSureDelete,
+      setStartSignUp,
     }),
-    [user, setUser, boards, boardTitle, setBoardTitle, areSure, areSureDelete]
+    [
+      user,
+      setUser,
+      boards,
+      boardTitle,
+      setBoardTitle,
+      areSure,
+      areSureDelete,
+      showGroup,
+      startSignUp,
+    ]
   );
 
   return (
@@ -151,6 +165,7 @@ const App = () => {
             />
           )}
           {signIn && <SignIn />}
+          {startSignUp && <SignIn startSignUp={true} />}
           {areSure && <SaveMessage boardTitle={boardTitle} />}
           {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
           {!user ? <Welcome /> : !showGroup ? <BoardsFolder /> : null}
