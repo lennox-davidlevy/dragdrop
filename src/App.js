@@ -17,6 +17,8 @@ import diskBlueIcon from './img/diskBlue.png';
 import emptyFolderIcon from './img/emptyFolder.png';
 import { UserContext } from './components/UserContext';
 import SignIn from './components/SignIn';
+import SaveMessage from './components/SaveMessage';
+import DeleteMessage from './components/DeleteMessage';
 
 const App = () => {
   const [numberOfGroups, setNumberOfGroups] = useState(0);
@@ -27,9 +29,11 @@ const App = () => {
   const [board, setBoard] = useState(null);
   const [currentBoard, setCurrentBoard] = useState(null);
   const [boardTitle, setBoardTitle] = useState('');
+  const [newBoardAdded, setNewBoardAdded] = useState(false);
   const [showGroup, setShowGroup] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [areSure, setAreSure] = useState(false);
+  const [areSureDelete, setAreSureDelete] = useState(false);
   const [signIn, setSignIn] = useState(false);
 
   useEffect(() => {
@@ -56,6 +60,7 @@ const App = () => {
     }
     setHasChanged(false);
     let tempTitle = checkForDupes(tempBoards, boardTitle);
+
     const newBoard = {
       title: tempTitle,
       groups: currentBoard,
@@ -65,6 +70,7 @@ const App = () => {
       saveBoardHelper(setBoards, tempBoards);
       setShowGroup(!showGroup);
     }, 285);
+    setNewBoardAdded(false);
   };
 
   const deleteBoard = () => {
@@ -88,12 +94,13 @@ const App = () => {
     let tempTitle = checkForDupes(tempBoards, 'New Board');
     tempBoards.push(templateBoard(tempTitle));
     saveBoardHelper(setBoards, tempBoards);
+    setNewBoardAdded(true);
   };
 
   const showMyBoards = () => {
     if (hasChanged) {
-      console.log('ARE YOU SURE?');
-      showGroup && setShowGroup(!showGroup);
+      setAreSure(true);
+      // showGroup && setShowGroup(!showGroup);
       return;
     }
     showGroup && setShowGroup(!showGroup);
@@ -119,8 +126,12 @@ const App = () => {
       showErrorMessage,
       setShowErrorMessage,
       setErrorMessages,
+      setAreSure,
+      saveBoard,
+      deleteBoard,
+      setAreSureDelete,
     }),
-    [user, setUser, boards, boardTitle, setBoardTitle]
+    [user, setUser, boards, boardTitle, setBoardTitle, areSure, areSureDelete]
   );
 
   return (
@@ -138,6 +149,9 @@ const App = () => {
               setShowErrorMessage={setShowErrorMessage}
             />
           )}
+          {signIn && <SignIn />}
+          {areSure && <SaveMessage boardTitle={boardTitle} />}
+          {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
           {!showGroup ? (
             <Welcome
               user={user}
@@ -150,7 +164,6 @@ const App = () => {
               setNumberOfGroups={setNumberOfGroups}
             />
           )}
-          {signIn && <SignIn />}
         </div>
         <div className="desktop-icons">
           <div className="save-board-icon-group">
@@ -159,7 +172,10 @@ const App = () => {
             <span>Save Board</span>
           </div>
           <div className="delete-board-icon-group">
-            <img onClick={() => deleteBoard()} src={recycleIcon} />
+            <img
+              onClick={() => showGroup && setAreSureDelete(true)}
+              src={recycleIcon}
+            />
             <br></br>
             <span>Delete Board</span>
           </div>

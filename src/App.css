@@ -440,6 +440,7 @@ button {
   box-shadow: 1px 2px black;
   font-family: Tahoma;
   font-weight: 100;
+  z-index: 2;
 }
 
 .error-message-container ul {
@@ -563,3 +564,102 @@ button {
   position: fixed;
   z-index: -1;
 } */
+
+.save-message-button-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 25%;
+}
+
+.save-message-button-group .message-button {
+  margin-left: 0;
+  margin-right: 5px;
+  text-align: center;
+  width: 66px;
+  height: 27px;
+}
+.delete-message-button-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 32%;
+}
+
+.delete-message-button-group .message-button {
+  margin-left: 0;
+  margin-right: 5px;
+  text-align: center;
+  width: 66px;
+  height: 27px;
+}
+
+.login-message-container {
+  text-align: left;
+  font-family: monospace;
+  margin-left: 16px;
+  padding-top: 3px;
+}
+
+.login-message-parent-container {
+  display: flex;
+  flex-direction: column;
+  border-width: 1px;
+  border-style: solid;
+  width: 415px;
+  height: auto;
+  background: #c0c0c0;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -163px;
+  margin-left: -225px;
+  box-shadow: 1px 2px black;
+  font-family: Tahoma;
+  font-weight: 100;
+}
+
+.login-message-button-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 26%;
+  padding-bottom: 0.5rem;
+}
+.login-message-button-group .message-button {
+  margin-left: 0;
+  margin-right: 10px;
+  width: 67px;
+  font-size: 11px;
+  outline: 1px solid #000000;
+  background: #c0c0c0;
+  border-style: solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 4px 10px;
+}
+
+.login-input-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.login-block {
+  margin-bottom: 5px;
+}
+
+.login-block label {
+  display: inline-block;
+  width: 88px;
+  text-align: left;
+  padding-right: 10px;
+  font-family: monospace;
+}
+
+.login-block input {
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-width: 1px;
+}
+
+.login-block input:focus {
+  outline-width: 0;
+}
