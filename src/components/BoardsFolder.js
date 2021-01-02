@@ -12,7 +12,6 @@ const BoardsFolder = () => {
     addBoard,
   } = useContext(UserContext);
   const handleClick = (key, boardTitle) => {
-    console.log('boardTitle:', boardTitle);
     setBoard(key);
     setShowGroup(true);
     setBoardTitle(boardTitle);

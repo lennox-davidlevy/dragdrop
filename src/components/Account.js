@@ -10,7 +10,6 @@ const Account = ({ handleMouseDown, handleMouseUp }) => {
 
   const goBack = () => {
     if (hasChanged) {
-      console.log('WAIT! DONT GO');
     }
   };
 
