@@ -1,18 +1,8 @@
-import React, { useContext } from 'react';
-import BoardsFolder from './BoardsFolder';
-import { UserContext } from './UserContext';
+import React from 'react';
+import notepadIcon from '../img/notepad.png';
 
 const Welcome = () => {
-  const { user } = useContext(UserContext);
-  return (
-    <div className="welcome-container">
-      {!user ? (
-        <div>WELCOME TO THOUGHT BOARD via WINDOWS 95 (why?)</div>
-      ) : (
-        <BoardsFolder />
-      )}
-    </div>
-  );
+  return <div className="welcome-container">WELCOME ONE AND ALL</div>;
 };
 
 export default Welcome;

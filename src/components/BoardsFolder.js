@@ -19,21 +19,23 @@ const BoardsFolder = () => {
   };
 
   return (
-    <div className="boards-folder">
-      {boards.map((board, key) => (
-        <div
-          className="folder"
-          onClick={() => handleClick(key, board.title)}
-          key={key}
-        >
-          <img src={emptyFolderIcon} />
-          <span className="caption">{board.title}</span>
+    <div className="welcome-container">
+      <div className="boards-folder">
+        {boards.map((board, key) => (
+          <div
+            className="folder"
+            onClick={() => handleClick(key, board.title)}
+            key={key}
+          >
+            <img src={emptyFolderIcon} />
+            <span className="caption">{board.title}</span>
+          </div>
+        ))}
+        <div className="folder" onClick={() => addBoard()}>
+          <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+          <br />
+          <span className="caption">Add Board</span>
         </div>
-      ))}
-      <div className="folder" onClick={() => addBoard()}>
-        <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-        <br />
-        <span className="caption">Add Board</span>
       </div>
     </div>
   );
