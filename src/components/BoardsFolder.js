@@ -10,6 +10,7 @@ const BoardsFolder = () => {
     setBoardTitle,
     setShowGroup,
     addBoard,
+    numberOfBoards,
   } = useContext(UserContext);
   const handleClick = (key, boardTitle) => {
     setBoard(key);
@@ -18,22 +19,39 @@ const BoardsFolder = () => {
   };
 
   return (
-    <div className="welcome-container">
-      <div className="boards-folder">
-        {boards.map((board, key) => (
-          <div
-            className="folder"
-            onClick={() => handleClick(key, board.title)}
-            key={key}
-          >
-            <img src={emptyFolderIcon} />
-            <span className="caption">{board.title}</span>
+    <div className="notepad-container">
+      <div className="folder-container">
+        <div className="title-container">
+          <div className="notepad-icon">
+            <img src={fullFolderIcon} alt="full folder icon" />
+            <div className="title-text">My Boards</div>
           </div>
-        ))}
-        <div className="folder" onClick={() => addBoard()}>
-          <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
-          <br />
-          <span className="caption">Add Board</span>
+          <button className="delete-group-button">X</button>
+        </div>
+        <div className="notepad-content">
+          <div className="boards-folder">
+            {boards.map((board, key) => (
+              <div
+                className="folder"
+                onClick={() => handleClick(key, board.title)}
+                key={key}
+              >
+                <img src={emptyFolderIcon} />
+                <span className="caption">{board.title}</span>
+              </div>
+            ))}
+            <div className="folder" onClick={() => addBoard()}>
+              <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
+              <br />
+              <span className="caption">Add Board</span>
+            </div>
+          </div>
+        </div>
+        <div className="boards-folder-bottom-bar">
+          <div className="board-folder-bottom-left">
+            {numberOfBoards} Board(s)
+          </div>
+          <div className="board-folder-bottom-right">0 bytes</div>
         </div>
       </div>
     </div>

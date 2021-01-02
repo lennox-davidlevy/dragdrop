@@ -37,10 +37,15 @@ const App = () => {
   const [areSureDelete, setAreSureDelete] = useState(false);
   const [signIn, setSignIn] = useState(false);
   const [startSignUp, setStartSignUp] = useState(false);
+  const [numberOfBoards, setNumberOfBoards] = useState(null);
 
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
   }, []);
+
+  useEffect(() => {
+    setNumberOfBoards(boards.length);
+  }, [boards]);
 
   useEffect(() => {
     if (!board) return;
@@ -135,6 +140,7 @@ const App = () => {
       deleteBoard,
       setAreSureDelete,
       setStartSignUp,
+      numberOfBoards,
     }),
     [
       user,
@@ -146,6 +152,7 @@ const App = () => {
       areSureDelete,
       showGroup,
       startSignUp,
+      numberOfBoards,
     ]
   );
 
