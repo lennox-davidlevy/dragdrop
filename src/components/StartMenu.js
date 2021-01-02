@@ -64,7 +64,7 @@ const StartMenu = () => {
         onMouseDown={(e) => handleMouseDown(e)}
         onClick={() => setShowMenu(!showMenu)}
       >
-        <img className="windows-icon" src={windowsIcon} />
+        <img className="windows-icon" src={windowsIcon} alt="windows icon" />
         Board
       </div>
       {showMenu && (

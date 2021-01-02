@@ -3,9 +3,7 @@ import { UserContext } from './UserContext';
 import saveChangesIcon from '../img/saveChanges.png';
 
 const DeleteMessage = ({ boardTitle }) => {
-  const { setAreSureDelete, setShowGroup, deleteBoard } = useContext(
-    UserContext
-  );
+  const { setAreSureDelete, deleteBoard } = useContext(UserContext);
 
   const handleDelete = () => {
     setAreSureDelete(false);

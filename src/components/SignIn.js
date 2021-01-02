@@ -11,7 +11,6 @@ const SignIn = ({ startSignUp = false }) => {
     setUser,
     setBoards,
     setSignIn,
-    showErrorMessage,
     setShowErrorMessage,
     setErrorMessages,
     setStartSignUp,

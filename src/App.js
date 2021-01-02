@@ -102,7 +102,7 @@ const App = () => {
     let tempTitle = checkForDupes(tempBoards, 'New Board');
     tempBoards.push(templateBoard(tempTitle));
     saveBoardHelper(setBoards, tempBoards);
-    setNewBoardAdded(true);
+    // setNewBoardAdded(true);
   };
 
   const showMyBoards = () => {
@@ -123,6 +123,7 @@ const App = () => {
       setBoards,
       setShowGroup,
       showGroup,
+      showMyBoards,
       currentBoard,
       setCurrentBoard,
       boardTitle,
@@ -185,7 +186,11 @@ const App = () => {
         </div>
         <div className="desktop-icons">
           <div className="save-board-icon-group">
-            <img onClick={() => saveBoard()} src={diskBlueIcon} />
+            <img
+              onClick={() => saveBoard()}
+              src={diskBlueIcon}
+              alt="save icon"
+            />
             <br></br>
             <span>Save Board</span>
           </div>
@@ -193,12 +198,17 @@ const App = () => {
             <img
               onClick={() => showGroup && setAreSureDelete(true)}
               src={recycleIcon}
+              alt="delete icon"
             />
             <br></br>
             <span>Delete Board</span>
           </div>
           <div className="my-boards-icon-group">
-            <img onClick={() => showMyBoards()} src={emptyFolderIcon} />
+            <img
+              onClick={() => showMyBoards()}
+              src={emptyFolderIcon}
+              alt="my boards icon"
+            />
             <br></br>
             <span>My Boards</span>
           </div>
