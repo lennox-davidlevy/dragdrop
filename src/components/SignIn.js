@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { loginAuthentication, registerUser } from './helpers/backendHelpers';
 import { UserContext } from './UserContext';
+import loginIcon from '../img/loginIcon.png';
 
 const SignIn = () => {
   const initialState = { email: '', password: '', password2: '' };
   const [formData, setFormData] = useState(initialState);
+  const [signUp, setSignUp] = useState(false);
   const {
     setUser,
     setBoards,
@@ -20,7 +22,8 @@ const SignIn = () => {
     const { email, password, password2 } = formData;
     try {
       let result;
-      if (false) {
+      if (signUp) {
+        console.log(password, password2);
         if (password !== password2) {
           setShowErrorMessage(true);
           setErrorMessages(['Password does not match']);
@@ -41,19 +44,19 @@ const SignIn = () => {
       }
       setUser(result.email);
       setBoards(result.boards);
+      setSignIn(false);
     } catch (err) {
       console.error(`clientside err ${err}`);
     }
     const resetLogin = document.getElementById('login-account-nav');
     resetLogin.classList.remove('clicked');
-    setSignIn(false);
     setFormData(initialState);
   };
 
   const handleCancel = (e, name) => {
-    e.preventDefault();
-    const resetLogin = document.getElementById(name);
-    resetLogin.classList.remove('clicked');
+    // e.preventDefault();
+    // const resetLogin = document.getElementById(name);
+    // resetLogin.classList.remove('clicked');
     setSignIn(false);
     setShowErrorMessage(false);
     setFormData(initialState);
@@ -67,57 +70,78 @@ const SignIn = () => {
   };
   return (
     <>
-      <div className="login-form">
-        <form className="login-container">
-          <div className="login-title">{'Login'}</div>
-          <input
-            name="email"
-            value={formData.email}
-            type="email"
-            onChange={(e) => handleChange(e)}
-            placeholder="Email..."
-          />
-          <input
-            name="password"
-            value={formData.password}
-            type="password"
-            onChange={(e) => handleChange(e)}
-            placeholder="Password..."
-          />
-          {/* {signUp && (
+      <div className="login-message-parent-container">
+        <div className="title-container">
+          <div className="error-title-text">{signUp ? 'Signup' : 'Login'}</div>
+          <button
+            type="button"
+            className="delete-group-button"
+            onClick={() => setSignIn(false)}
+          >
+            X
+          </button>
+        </div>
+        <div className="login-message-container">
+          <div className="message-contents">
+            <img className="message-icon" src={loginIcon} alt="saveChanges" />
+            <span>Enter Username and Password </span>
+          </div>
+        </div>
+        <div className="login-input-container">
+          <div className="login-block">
+            <label>User name:</label>
             <input
-              name="password2"
-              value={formData.password2}
+              name="email"
+              value={formData.email}
+              type="email"
+              onChange={(e) => handleChange(e)}
+              placeholder="Email..."
+            />
+          </div>
+          <div className="login-block">
+            <label>Password:</label>
+            <input
+              name="password"
+              value={formData.password}
               type="password"
               onChange={(e) => handleChange(e)}
-              placeholder="Repeat Password..."
+              placeholder="Password..."
             />
-          )} */}
-          <div className="login-button-group">
-            <button
-              className="login-button"
-              onClick={(e) => handleSubmit(e)}
-              disabled={
-                formData.email.length === 0 || formData.password.length === 0
-              }
-            >
-              Submit
-            </button>
-            <button
-              type="button"
-              className="login-button"
-              onClick={() => console.log('signUp')}
-            >
-              Login
-            </button>
-            <button
-              className="login-button"
-              onClick={(e) => handleCancel(e, 'login-account-nav')}
-            >
-              Cancel
-            </button>
           </div>
-        </form>
+          {signUp && (
+            <div className="login-block">
+              <label>Password:</label>
+              <input
+                name="password2"
+                value={formData.passwords}
+                type="password"
+                onChange={(e) => handleChange(e)}
+                placeholder="Password..."
+              />
+            </div>
+          )}
+        </div>
+        <div className="login-message-button-group">
+          <button
+            className="message-button"
+            onClick={(e) => handleSubmit(e)}
+            disabled={
+              formData.email.length === 0 || formData.password.length === 0
+            }
+          >
+            OK
+          </button>
+          <button className="message-button" onClick={() => handleCancel()}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className="message-button"
+            onClick={() => setSignUp(!signUp)}
+          >
+            {signUp ? 'Login' : 'Sign Up'}
+          </button>
+        </div>
       </div>
     </>
   );
