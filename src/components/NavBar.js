@@ -26,7 +26,7 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
       </div> */}
       <StartMenu />
       <div className="right-side-nav">
-        {!user ? (
+        {/* {!user ? (
           <Login
             handleMouseDown={handleMouseDown}
             handleMouseUp={handleMouseUp}
@@ -38,7 +38,7 @@ const NavBar = ({ numberOfGroups, setShowErrorMessage, setErrorMessages }) => {
             handleMouseDown={handleMouseDown}
             handleMouseUp={handleMouseUp}
           />
-        )}
+        )} */}
 
         {numberOfGroups === 1 ? (
           <div className="group-num-nav">{numberOfGroups} Group</div>

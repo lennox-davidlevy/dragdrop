@@ -82,20 +82,26 @@ const Login = ({
         <div className="login-form">
           <form className="login-container">
             <div className="login-title">{signUp ? 'Sign Up' : 'Login'}</div>
-            <input
-              name="email"
-              value={formData.email}
-              type="email"
-              onChange={(e) => handleChange(e)}
-              placeholder="Email..."
-            />
-            <input
-              name="password"
-              value={formData.password}
-              type="password"
-              onChange={(e) => handleChange(e)}
-              placeholder="Password..."
-            />
+            <div className="block">
+              <label>User name:</label>
+              <input
+                name="email"
+                value={formData.email}
+                type="email"
+                onChange={(e) => handleChange(e)}
+                placeholder="Email..."
+              />
+            </div>
+            <div className="block">
+              <label>Password:</label>
+              <input
+                name="password"
+                value={formData.password}
+                type="password"
+                onChange={(e) => handleChange(e)}
+                placeholder="Password..."
+              />
+            </div>
             {signUp && (
               <input
                 name="password2"
