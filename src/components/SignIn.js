@@ -48,8 +48,8 @@ const SignIn = () => {
     } catch (err) {
       console.error(`clientside err ${err}`);
     }
-    const resetLogin = document.getElementById('login-account-nav');
-    resetLogin.classList.remove('clicked');
+    // const resetLogin = document.getElementById('login-account-nav');
+    // resetLogin.classList.remove('clicked');
     setFormData(initialState);
   };
 
