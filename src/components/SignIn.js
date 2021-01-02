@@ -3,10 +3,10 @@ import { loginAuthentication, registerUser } from './helpers/backendHelpers';
 import { UserContext } from './UserContext';
 import loginIcon from '../img/loginIcon.png';
 
-const SignIn = () => {
+const SignIn = ({ startSignUp = false }) => {
   const initialState = { email: '', password: '', password2: '' };
   const [formData, setFormData] = useState(initialState);
-  const [signUp, setSignUp] = useState(false);
+  const [signUp, setSignUp] = useState(startSignUp);
   const {
     setUser,
     setBoards,
@@ -14,6 +14,7 @@ const SignIn = () => {
     showErrorMessage,
     setShowErrorMessage,
     setErrorMessages,
+    setStartSignUp,
   } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
@@ -23,7 +24,6 @@ const SignIn = () => {
     try {
       let result;
       if (signUp) {
-        console.log(password, password2);
         if (password !== password2) {
           setShowErrorMessage(true);
           setErrorMessages(['Password does not match']);
@@ -45,6 +45,7 @@ const SignIn = () => {
       setUser(result.email);
       setBoards(result.boards);
       setSignIn(false);
+      setStartSignUp(false);
     } catch (err) {
       console.error(`clientside err ${err}`);
     }
@@ -60,6 +61,7 @@ const SignIn = () => {
     setSignIn(false);
     setShowErrorMessage(false);
     setFormData(initialState);
+    setStartSignUp(false);
   };
 
   const handleChange = (e) => {

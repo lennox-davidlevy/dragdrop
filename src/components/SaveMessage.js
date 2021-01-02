@@ -8,18 +8,15 @@ const SaveMessage = ({ boardTitle }) => {
   const handleSave = () => {
     setAreSure(false);
     saveBoard();
-    console.log('Save and Close');
   };
 
   const handleCloseWithoutSaving = () => {
     setAreSure(false);
     setShowGroup(false);
-    console.log('Close without saving');
   };
 
   const handleCancel = () => {
     setAreSure(false);
-    console.log('Close without saving');
   };
 
   return (

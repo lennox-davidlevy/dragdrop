@@ -12,6 +12,7 @@ const StartMenu = () => {
     setUser,
     setBoard,
     setShowGroup,
+    showGroup,
     addBoard,
   } = useContext(UserContext);
 
@@ -35,6 +36,10 @@ const StartMenu = () => {
   const handleAddBoard = () => {
     const startNav = document.getElementById('start-nav');
     startNav.classList.toggle('clicked');
+    if (showGroup) {
+      setShowMenu(false);
+      return;
+    }
     addBoard();
     setShowMenu(false);
   };
@@ -43,6 +48,12 @@ const StartMenu = () => {
     const startNav = document.getElementById('start-nav');
     startNav.classList.toggle('clicked');
     setShowGroup(false);
+    setShowMenu(false);
+  };
+
+  const handleCloseMenu = () => {
+    const startNav = document.getElementById('start-nav');
+    startNav.classList.toggle('clicked');
     setShowMenu(false);
   };
   return (
@@ -79,10 +90,7 @@ const StartMenu = () => {
             </div>
           )}
 
-          {/* <div
-            className="full-screen"
-            onClick={() => console.log('full screen clicked')}
-          ></div> */}
+          <div className="full-screen" onClick={() => handleCloseMenu()}></div>
         </div>
       )}
     </>
