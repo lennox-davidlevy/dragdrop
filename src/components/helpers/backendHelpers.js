@@ -23,13 +23,19 @@ const getWords = async (setRandomWord) => {
   }
 };
 
-const checkForDupes = (boards, str) => {
+const checkForDupes = (boards, str, id) => {
   const dict = {};
   for (let i = 0; i < boards.length; i++) {
     let title = boards[i].title;
+    let existingId = boards[i]._id;
     let temp = title.substr(0, title.indexOf('('));
     temp = temp || title;
-    dict[temp] = dict[temp] + 1 || 1;
+    if (existingId === id && title === str) {
+      dict[temp] = dict[temp] - 1;
+      break;
+    } else {
+      dict[temp] = dict[temp] + 1 || 1;
+    }
   }
 
   let newTitle;
