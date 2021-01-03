@@ -230,7 +230,7 @@ const setOnTopHelper = (containerName) => {
   const boardsContainer = document.getElementById('boards-folder-container');
   const welcomeContainer = document.getElementById('welcome-container');
   const aboutContainer = document.getElementById('about-container');
-  const dragContainer = document.getElementById('my-masonry-grid-column');
+  const dragContainer = document.getElementById('drag_drop');
   //set the clicked window to be on top
   //not very elegant tbh will have to come back and think of something better.
   if (containerName === 'welcome') {
@@ -240,10 +240,9 @@ const setOnTopHelper = (containerName) => {
     if (aboutContainer !== null) {
       aboutContainer.classList.remove('on-top');
     }
+
     if (dragContainer !== null) {
-      dragContainer.forEach((el) => {
-        el.classList.remove('on-top');
-      });
+      dragContainer.classList.remove('on-top');
     }
     welcomeContainer.classList.add('on-top');
   } else if (containerName === 'boards') {
@@ -253,10 +252,9 @@ const setOnTopHelper = (containerName) => {
     if (aboutContainer !== null) {
       aboutContainer.classList.remove('on-top');
     }
+
     if (dragContainer !== null) {
-      dragContainer.forEach((el) => {
-        el.classList.remove('on-top');
-      });
+      dragContainer.classList.remove('on-top');
     }
     boardsContainer.classList.add('on-top');
   } else if (containerName === 'about') {
@@ -266,10 +264,9 @@ const setOnTopHelper = (containerName) => {
     if (boardsContainer !== null) {
       boardsContainer.classList.remove('on-top');
     }
+
     if (dragContainer !== null) {
-      dragContainer.forEach((el) => {
-        el.classList.remove('on-top');
-      });
+      dragContainer.classList.remove('on-top');
     }
     aboutContainer.classList.add('on-top');
   } else if (containerName === 'drag') {
@@ -282,10 +279,9 @@ const setOnTopHelper = (containerName) => {
     if (welcomeContainer !== null) {
       welcomeContainer.classList.remove('on-top');
     }
+
     if (dragContainer !== null) {
-      dragContainer.forEach((el) => {
-        el.classList.add('on-top');
-      });
+      dragContainer.classList.add('on-top');
     }
   }
 };
