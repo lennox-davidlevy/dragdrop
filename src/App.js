@@ -20,9 +20,9 @@ import { UserContext } from './components/UserContext';
 import SignIn from './components/SignIn';
 import SaveMessage from './components/SaveMessage';
 import DeleteMessage from './components/DeleteMessage';
+import AddBoardMessage from './components/AddBoard';
 
 const App = () => {
-  const [numberOfGroups, setNumberOfGroups] = useState(0);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [errorMessages, setErrorMessages] = useState([]);
   const [user, setUser] = useState(null);
@@ -30,7 +30,7 @@ const App = () => {
   const [board, setBoard] = useState(null);
   const [currentBoard, setCurrentBoard] = useState(null);
   const [boardTitle, setBoardTitle] = useState('');
-  const [newBoardAdded, setNewBoardAdded] = useState(false);
+  // const [newBoardAdded, setNewBoardAdded] = useState(false);
   const [showGroup, setShowGroup] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [areSure, setAreSure] = useState(false);
@@ -38,7 +38,7 @@ const App = () => {
   const [signIn, setSignIn] = useState(false);
   const [startSignUp, setStartSignUp] = useState(false);
   const [numberOfBoards, setNumberOfBoards] = useState(null);
-
+  const [showAddBoard, setShowAddBoard] = useState(false);
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
   }, []);
@@ -66,8 +66,8 @@ const App = () => {
       }, 285);
       return;
     }
-    setHasChanged(false);
-    let tempTitle = checkForDupes(tempBoards, boardTitle);
+    const id = tempBoards[board]._id;
+    let tempTitle = checkForDupes(tempBoards, boardTitle, id);
 
     const newBoard = {
       title: tempTitle,
@@ -78,7 +78,8 @@ const App = () => {
       saveBoardHelper(setBoards, tempBoards);
       setShowGroup(false);
     }, 285);
-    setNewBoardAdded(false);
+    setHasChanged(false);
+    // setNewBoardAdded(false);
   };
 
   const deleteBoard = () => {
@@ -97,12 +98,20 @@ const App = () => {
     }, 285);
   };
 
-  const addBoard = () => {
+  const addBoard = async () => {
+    let tempBoardTitle = boardTitle || 'New Board';
     let tempBoards = JSON.parse(JSON.stringify(boards));
-    let tempTitle = checkForDupes(tempBoards, 'New Board');
+    let tempTitle = checkForDupes(tempBoards, tempBoardTitle);
     tempBoards.push(templateBoard(tempTitle));
-    saveBoardHelper(setBoards, tempBoards);
-    // setNewBoardAdded(true);
+    saveBoardHelper(setBoards, tempBoards).then(() => {
+      setBoard(boards.length);
+      setShowGroup(true);
+    });
+  };
+
+  const showAddBoardMessage = () => {
+    setBoardTitle('');
+    setShowAddBoard(true);
   };
 
   const showMyBoards = () => {
@@ -142,6 +151,8 @@ const App = () => {
       setAreSureDelete,
       setStartSignUp,
       numberOfBoards,
+      setShowAddBoard,
+      showAddBoardMessage,
     }),
     [
       user,
@@ -154,17 +165,17 @@ const App = () => {
       showGroup,
       startSignUp,
       numberOfBoards,
+      showAddBoard,
+      showAddBoardMessage,
+      hasChanged,
+      setHasChanged,
     ]
   );
 
   return (
     <div className="App">
       <UserContext.Provider value={providerValue}>
-        <NavBar
-          numberOfGroups={numberOfGroups}
-          setShowErrorMessage={setShowErrorMessage}
-          setErrorMessages={setErrorMessages}
-        />
+        <NavBar />
         <div className="App-header">
           {showErrorMessage && (
             <ErrorMessage
@@ -177,12 +188,8 @@ const App = () => {
           {areSure && <SaveMessage boardTitle={boardTitle} />}
           {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
           {!user ? <Welcome /> : !showGroup ? <BoardsFolder /> : null}
-          {showGroup && (
-            <DragGroup
-              data={boards[board]}
-              setNumberOfGroups={setNumberOfGroups}
-            />
-          )}
+          {showGroup && <DragGroup data={boards[board]} />}
+          {showAddBoard && <AddBoardMessage />}
         </div>
         <div className="desktop-icons">
           <div className="save-board-icon-group">

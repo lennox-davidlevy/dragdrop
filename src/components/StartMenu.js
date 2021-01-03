@@ -13,7 +13,8 @@ const StartMenu = () => {
     setBoard,
     setShowGroup,
     showGroup,
-    addBoard,
+    showAddBoardMessage,
+    showMyBoards,
   } = useContext(UserContext);
 
   const handleMouseDown = (e) => {
@@ -36,18 +37,18 @@ const StartMenu = () => {
   const handleAddBoard = () => {
     const startNav = document.getElementById('start-nav');
     startNav.classList.toggle('clicked');
-    if (showGroup) {
+    if (!user || showGroup) {
       setShowMenu(false);
       return;
     }
-    addBoard();
+    showAddBoardMessage();
     setShowMenu(false);
   };
 
   const handleShowMyBoards = () => {
     const startNav = document.getElementById('start-nav');
     startNav.classList.toggle('clicked');
-    setShowGroup(false);
+    showMyBoards();
     setShowMenu(false);
   };
 
