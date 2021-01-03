@@ -10,6 +10,7 @@ import {
   returnItems,
   breakpointColumnsObj,
   handleImageId,
+  setOnTopHelper,
 } from './helpers/frontendHelpers.js';
 import { getWords } from './helpers/backendHelpers';
 import { v4 as uuidv4 } from 'uuid';
@@ -211,7 +212,11 @@ const DragGroup = ({ data }) => {
   );
 
   return (
-    <div id="drag_drop" className="drag_drop">
+    <div
+      onClick={() => setOnTopHelper('drag')}
+      id="drag_drop"
+      className="drag_drop"
+    >
       <div className="board-title-header">
         Title:
         <input value={boardTitle} onChange={(e) => handleTitleChange(e)} />

@@ -1,9 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request');
-// const bcrypt = require('bcryptjs');
-// const jwt = require('jsonwebtoken');
-// const config = require('config');
 
 router.get('/', async (req, res) => {
   try {

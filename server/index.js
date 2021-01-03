@@ -1,11 +1,14 @@
 const express = require('express');
-const PORT = process.env.PORT || 5000;
+const bodyParser = require('body-parser');
 const connectDB = require('../config/db');
+const PORT = process.env.PORT || 5000;
 
 connectDB();
 const app = express();
 
-app.use(express.json({ extended: false }));
+// app.use(express.json({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 app.get('/', (req, res) => {
   res.send('API Running');
