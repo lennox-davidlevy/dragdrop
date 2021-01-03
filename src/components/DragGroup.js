@@ -213,9 +213,9 @@ const DragGroup = ({ data }) => {
 
   return (
     <div
-      onClick={() => setOnTopHelper('drag')}
+      // onClick={() => setOnTopHelper('drag')}
       id="drag_drop"
-      className="drag_drop on-top"
+      className="drag_drop"
     >
       <div className="board-title-header">
         Title:

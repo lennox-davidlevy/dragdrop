@@ -37,6 +37,7 @@ body {
 
 .drag_drop {
   padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 
   transform-origin: 4% 8%;
 

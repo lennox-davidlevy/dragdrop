@@ -213,35 +213,26 @@ const App = () => {
           {showAddBoard && <AddBoardMessage />}
         </div>
         <div className="desktop-icons">
-          <div className="save-board-icon-group">
-            <img
-              onClick={() => saveBoard()}
-              src={diskBlueIcon}
-              alt="save icon"
-            />
+          <div onClick={() => saveBoard()} className="save-board-icon-group">
+            <img src={diskBlueIcon} alt="save icon" />
             <br></br>
             <span>Save Board</span>
           </div>
-          <div className="delete-board-icon-group">
-            <img
-              onClick={() => showGroup && setAreSureDelete(true)}
-              src={recycleIcon}
-              alt="delete icon"
-            />
+          <div
+            onClick={() => showGroup && setAreSureDelete(true)}
+            className="delete-board-icon-group"
+          >
+            <img src={recycleIcon} alt="delete icon" />
             <br></br>
             <span>Delete Board</span>
           </div>
-          <div className="go-back-icon-group">
-            <img onClick={() => goBack()} src={goBackIcon} alt="go back icon" />
+          <div onClick={() => goBack()} className="go-back-icon-group">
+            <img src={goBackIcon} alt="go back icon" />
             <br></br>
             <span>Close Board</span>
           </div>
-          <div className="my-boards-icon-group">
-            <img
-              onClick={() => showMyBoards()}
-              src={emptyFolderIcon}
-              alt="my boards icon"
-            />
+          <div onClick={() => showMyBoards()} className="my-boards-icon-group">
+            <img src={emptyFolderIcon} alt="my boards icon" />
             <br></br>
             <span>My Boards</span>
           </div>
