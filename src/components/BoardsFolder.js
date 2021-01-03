@@ -19,6 +19,8 @@ const BoardsFolder = () => {
   } = useContext(UserContext);
   const handleClick = (key, boardTitle) => {
     if (showGroup) return;
+    const boardsContainer = document.getElementById('boards-folder-container');
+    boardsContainer.classList.remove('on-top');
     setBoard(key);
     setShowGroup(true);
     setBoardTitle(boardTitle);
