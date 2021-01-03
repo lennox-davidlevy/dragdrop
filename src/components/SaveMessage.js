@@ -3,20 +3,26 @@ import { UserContext } from './UserContext';
 import saveChangesIcon from '../img/saveChanges.png';
 
 const SaveMessage = ({ boardTitle }) => {
-  const { setAreSure, setShowGroup, saveBoard, setHasChanged } = useContext(
-    UserContext
-  );
+  const {
+    setAreSure,
+    setShowGroup,
+    saveBoard,
+    setHasChanged,
+    setShowBoardsFolder,
+  } = useContext(UserContext);
 
   const handleSave = () => {
     setAreSure(false);
     setHasChanged(false);
     saveBoard();
+    setShowBoardsFolder(true);
   };
 
   const handleCloseWithoutSaving = () => {
     setAreSure(false);
     setShowGroup(false);
     setHasChanged(false);
+    setShowBoardsFolder(true);
   };
 
   const handleCancel = () => {

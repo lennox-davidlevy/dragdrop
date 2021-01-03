@@ -15,6 +15,9 @@ const StartMenu = () => {
     showGroup,
     showAddBoardMessage,
     showMyBoards,
+    setShowAbout,
+    showAbout,
+    setShowWelcome,
   } = useContext(UserContext);
 
   const handleMouseDown = (e) => {
@@ -32,6 +35,7 @@ const StartMenu = () => {
     startNav.classList.toggle('clicked');
     signOut(setUser, setBoard, setShowGroup);
     setShowMenu(false);
+    setShowWelcome(true);
   };
 
   const handleAddBoard = () => {
@@ -42,6 +46,13 @@ const StartMenu = () => {
       return;
     }
     showAddBoardMessage();
+    setShowMenu(false);
+  };
+
+  const handleShowAbout = () => {
+    const startNav = document.getElementById('start-nav');
+    startNav.classList.toggle('clicked');
+    setShowAbout(!showAbout);
     setShowMenu(false);
   };
 
@@ -73,7 +84,9 @@ const StartMenu = () => {
           <div id="left">
             <div className="b"></div>
           </div>
-          <div className="menu-item">About</div>
+          <div onClick={() => handleShowAbout()} className="menu-item">
+            About
+          </div>
           <div className="menu-item" onClick={() => handleAddBoard()}>
             New Board
           </div>

@@ -202,7 +202,9 @@ const returnItems = (
 };
 
 const breakpointColumnsObj = {
-  default: 4,
+  default: 5,
+  2000: 5,
+  1900: 4,
   1500: 4,
   1400: 3,
   1160: 2,
@@ -224,6 +226,70 @@ const handleImageId = (list) => {
   return dict;
 };
 
+const setOnTopHelper = (containerName) => {
+  const boardsContainer = document.getElementById('boards-folder-container');
+  const welcomeContainer = document.getElementById('welcome-container');
+  const aboutContainer = document.getElementById('about-container');
+  const dragContainer = document.getElementById('my-masonry-grid-column');
+  //set the clicked window to be on top
+  //not very elegant tbh will have to come back and think of something better.
+  if (containerName === 'welcome') {
+    if (boardsContainer !== null) {
+      boardsContainer.classList.remove('on-top');
+    }
+    if (aboutContainer !== null) {
+      aboutContainer.classList.remove('on-top');
+    }
+    if (dragContainer !== null) {
+      dragContainer.forEach((el) => {
+        el.classList.remove('on-top');
+      });
+    }
+    welcomeContainer.classList.add('on-top');
+  } else if (containerName === 'boards') {
+    if (welcomeContainer !== null) {
+      welcomeContainer.classList.remove('on-top');
+    }
+    if (aboutContainer !== null) {
+      aboutContainer.classList.remove('on-top');
+    }
+    if (dragContainer !== null) {
+      dragContainer.forEach((el) => {
+        el.classList.remove('on-top');
+      });
+    }
+    boardsContainer.classList.add('on-top');
+  } else if (containerName === 'about') {
+    if (welcomeContainer !== null) {
+      welcomeContainer.classList.remove('on-top');
+    }
+    if (boardsContainer !== null) {
+      boardsContainer.classList.remove('on-top');
+    }
+    if (dragContainer !== null) {
+      dragContainer.forEach((el) => {
+        el.classList.remove('on-top');
+      });
+    }
+    aboutContainer.classList.add('on-top');
+  } else if (containerName === 'drag') {
+    if (boardsContainer !== null) {
+      boardsContainer.classList.remove('on-top');
+    }
+    if (aboutContainer !== null) {
+      aboutContainer.classList.remove('on-top');
+    }
+    if (welcomeContainer !== null) {
+      welcomeContainer.classList.remove('on-top');
+    }
+    if (dragContainer !== null) {
+      dragContainer.forEach((el) => {
+        el.classList.add('on-top');
+      });
+    }
+  }
+};
+
 export {
   handleDragStartHelper,
   handleDragEnterHelper,
@@ -232,4 +298,5 @@ export {
   returnItems,
   breakpointColumnsObj,
   handleImageId,
+  setOnTopHelper,
 };

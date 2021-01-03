@@ -69,15 +69,3 @@ const AddBoardMessage = () => {
 };
 
 export default AddBoardMessage;
-
-{
-  /* <div className="add-board-message-container">
-  <input value={boardTitle} onChange={(e) => handleChange(e)} />
-  <button type="button" onClick={() => handleSubmit()}>
-    OK
-  </button>
-  <button type="button" onClick={() => handleCancel()}>
-    Cancel
-  </button>
-</div>; */
-}

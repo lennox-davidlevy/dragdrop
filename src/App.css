@@ -13,6 +13,10 @@
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
 * {
   margin: 0;
   padding: 0;
@@ -233,7 +237,7 @@ textarea {
   border-color: #ffffff #808080 #808080 #ffffff;
   display: flex;
   justify-content: space-between;
-  z-index: 2;
+  z-index: 101;
 }
 .start-nav {
   /* width: 85px; */
@@ -429,7 +433,7 @@ button {
   box-shadow: 1px 2px black;
   font-family: Tahoma;
   font-weight: 100;
-  z-index: 2;
+  z-index: 102;
 }
 
 .error-message-container ul {
@@ -497,7 +501,7 @@ button {
   margin-bottom: 25px;
 }
 
-.welcome-container {
+/* .welcome-container {
   width: 400px;
   background: white;
   height: 400px;
@@ -506,7 +510,7 @@ button {
   flex-direction: column;
   margin-top: 100px;
   color: black;
-}
+} */
 .desktop-icons {
   position: fixed;
   top: 7%;
@@ -623,7 +627,7 @@ button {
   box-shadow: 1px 2px black;
   font-family: Tahoma;
   font-weight: 100;
-  z-index: 1;
+  z-index: 101;
 }
 
 .login-message-button-group {
@@ -825,4 +829,36 @@ button {
 
 .board-title-header input:focus {
   outline: none;
+}
+.about-container .notepad-container {
+  top: 29%;
+  left: 0%;
+  z-index: 1;
+}
+.about-container .notepad-content {
+  height: 500px;
+}
+
+.about-picture-container {
+  display: flex;
+}
+.about-picture {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+}
+
+.boards-folder-container .notepad-container {
+  top: 25%;
+  left: 41%;
+}
+
+.go-back-icon-group img {
+  margin-left: -18px;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.on-top {
+  z-index: 99;
 }
