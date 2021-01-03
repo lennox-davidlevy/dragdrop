@@ -70,8 +70,8 @@ body {
 }
 
 .item-title {
-  font-family: Tahoma;
-  font-size: 15px;
+  font-family: 'notepad';
+  font-size: 18px;
   background-color: transparent;
   border: 0px solid;
   color: rgb(82, 81, 81);
@@ -110,6 +110,7 @@ body {
   background-color: transparent;
   border: 0px solid;
   color: #fff;
+  width: 90%;
 }
 .title-text:focus {
   outline: none;
@@ -132,7 +133,7 @@ body {
   display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
   justify-content: center;
-  margin-left: -15px; /* gutter size offset */
+  margin-left: 0px; /* gutter size offset */
   width: 100%;
 }
 .my-masonry-grid_column {
@@ -140,6 +141,7 @@ body {
   background-clip: padding-box;
   min-width: 300px;
   max-width: 300px;
+  z-index: 1;
 }
 
 /* Style your items */
@@ -222,7 +224,7 @@ textarea {
 .taskBar {
   height: 30px;
   background-color: rgb(192, 192, 192);
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   left: 0px;
   right: 0px;
@@ -231,6 +233,7 @@ textarea {
   border-color: #ffffff #808080 #808080 #ffffff;
   display: flex;
   justify-content: space-between;
+  z-index: 2;
 }
 .start-nav {
   /* width: 85px; */
@@ -330,10 +333,6 @@ textarea {
   padding: 4px 10px;
   margin-top: 1px;
   cursor: pointer;
-}
-
-.clicked {
-  border-color: #808080 #ffffff #ffffff #808080;
 }
 
 .login-form {
@@ -674,8 +673,8 @@ button {
 
 .notepad-container {
   position: fixed;
-  top: 15%;
-  left: 32%;
+  top: 9%;
+  left: 30%;
   background: #bfbfbf;
   padding: 2px;
   border: 2px solid;
@@ -756,4 +755,74 @@ button {
   padding: 2px;
   border: 2px solid;
   border-color: #808080 #808080 #ffffff #ffffff;
+}
+
+.title-message-container {
+  text-align: left;
+  font-family: monospace;
+  margin-left: 17px;
+}
+
+.title-block label {
+  display: inline-block;
+  width: 96px;
+  text-align: left;
+  padding-right: 10px;
+  font-family: monospace;
+}
+
+.title-block input {
+  width: 58%;
+  font-family: 'notepad';
+  font-size: 15px;
+}
+
+.title-block input:focus {
+  outline: none;
+}
+
+.title-button-group {
+  display: flex;
+  flex-direction: row;
+  margin-left: 33%;
+}
+
+.title-button-group .message-button {
+  margin-left: 0;
+  margin-right: 5px;
+  text-align: center;
+  width: 66px;
+  height: 27px;
+}
+
+.clicked {
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+.board-title-header {
+  position: fixed;
+  top: 2%;
+  left: 1%;
+  font-family: 'notepad';
+  font-weight: bold;
+  font-size: 15px;
+  border: 1px solid;
+  color: #fff;
+  z-index: 0;
+  border-right: 0px;
+  border-bottom: 1px solid yellow;
+  border-left: 0px;
+}
+
+.board-title-header input {
+  margin: 2px 0 0 4px;
+  font-family: 'notepad';
+  font-weight: bold;
+  font-size: 15px;
+  background-color: transparent;
+  border: 0px solid;
+  color: #fff;
+}
+
+.board-title-header input:focus {
+  outline: none;
 }

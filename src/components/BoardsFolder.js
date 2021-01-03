@@ -11,6 +11,8 @@ const BoardsFolder = () => {
     setShowGroup,
     addBoard,
     numberOfBoards,
+    setShowAddBoard,
+    showAddBoardMessage,
   } = useContext(UserContext);
   const handleClick = (key, boardTitle) => {
     setBoard(key);
@@ -40,7 +42,7 @@ const BoardsFolder = () => {
                 <span className="caption">{board.title}</span>
               </div>
             ))}
-            <div className="folder" onClick={() => addBoard()}>
+            <div className="folder" onClick={() => showAddBoardMessage()}>
               <i className="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
               <br />
               <span className="caption">Add Board</span>

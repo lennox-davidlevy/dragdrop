@@ -15,7 +15,7 @@ import { getWords } from './helpers/backendHelpers';
 import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from './UserContext';
 
-const DragGroup = ({ data, setNumberOfGroups }) => {
+const DragGroup = ({ data }) => {
   const [list, setList] = useState(data['groups']);
   const [current, setCurrent] = useState(false);
   const [newGroupCheck, setNewGroupCheck] = useState(true);
@@ -40,7 +40,6 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
     const newGroupInput = document.getElementById(loc);
     newGroupInput.focus();
     setNewGroupCheck(false);
-    setNumberOfGroups(list.length);
   }, [newGroupCheck, list.length]);
 
   useEffect(() => {
@@ -213,7 +212,8 @@ const DragGroup = ({ data, setNumberOfGroups }) => {
 
   return (
     <div id="drag_drop" className="drag_drop">
-      <div>
+      <div className="board-title-header">
+        Title:
         <input value={boardTitle} onChange={(e) => handleTitleChange(e)} />
       </div>
       <Masonry
