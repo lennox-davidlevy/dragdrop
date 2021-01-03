@@ -130,7 +130,8 @@ const returnItems = (
             ? (e) => handleDragEnter(e, { groupIdx, itemIdx: 0 })
             : null
         }
-        className="drag-group"
+        className="drag-group on-top"
+        onClick={setOnTopHelper('drag')}
       >
         <div className="title-container">
           <input
@@ -231,6 +232,8 @@ const setOnTopHelper = (containerName) => {
   const welcomeContainer = document.getElementById('welcome-container');
   const aboutContainer = document.getElementById('about-container');
   const dragContainer = document.getElementById('drag_drop');
+  const dragGroupContainer = document.getElementsByClassName('drag-group');
+
   //set the clicked window to be on top
   //not very elegant tbh will have to come back and think of something better.
   if (containerName === 'welcome') {
@@ -241,9 +244,15 @@ const setOnTopHelper = (containerName) => {
       aboutContainer.classList.remove('on-top');
     }
 
-    if (dragContainer !== null) {
-      dragContainer.classList.remove('on-top');
-    }
+    // if (dragContainer !== null) {
+    //   dragContainer.classList.remove('on-top');
+    // }
+    // if (dragGroupContainer !== null) {
+    //   console.log('ran');
+    //   Array.from(dragGroupContainer).forEach((el) => {
+    //     el.classList.remove('on-top');
+    //   });
+    // }
     welcomeContainer.classList.add('on-top');
   } else if (containerName === 'boards') {
     if (welcomeContainer !== null) {
@@ -253,9 +262,17 @@ const setOnTopHelper = (containerName) => {
       aboutContainer.classList.remove('on-top');
     }
 
-    if (dragContainer !== null) {
-      dragContainer.classList.remove('on-top');
-    }
+    // if (dragContainer !== null) {
+    //   dragContainer.classList.remove('on-top');
+    // }
+
+    // if (dragGroupContainer !== null) {
+    //   console.log('ran');
+
+    //   Array.from(dragGroupContainer).forEach((el) => {
+    //     el.classList.remove('on-top');
+    //   });
+    // }
     boardsContainer.classList.add('on-top');
   } else if (containerName === 'about') {
     if (welcomeContainer !== null) {
@@ -265,9 +282,16 @@ const setOnTopHelper = (containerName) => {
       boardsContainer.classList.remove('on-top');
     }
 
-    if (dragContainer !== null) {
-      dragContainer.classList.remove('on-top');
-    }
+    // if (dragContainer !== null) {
+    //   dragContainer.classList.remove('on-top');
+    // }
+    // if (dragGroupContainer !== null) {
+    //   console.log('ran');
+
+    //   Array.from(dragGroupContainer).forEach((el) => {
+    //     el.classList.remove('on-top');
+    //   });
+    // }
     aboutContainer.classList.add('on-top');
   } else if (containerName === 'drag') {
     if (boardsContainer !== null) {
@@ -280,9 +304,16 @@ const setOnTopHelper = (containerName) => {
       welcomeContainer.classList.remove('on-top');
     }
 
-    if (dragContainer !== null) {
-      dragContainer.classList.add('on-top');
-    }
+    // if (dragContainer !== null) {
+    //   dragContainer.classList.add('on-top');
+    // }
+    // if (dragGroupContainer !== null) {
+    //   console.log('ran');
+
+    //   Array.from(dragGroupContainer).forEach((el) => {
+    //     el.classList.add('on-top');
+    //   });
+    // }
   }
 };
 
