@@ -16,11 +16,13 @@ import BoardsFolder from './components/BoardsFolder';
 import recycleIcon from './img/recycleBin.png';
 import diskBlueIcon from './img/diskBlue.png';
 import emptyFolderIcon from './img/emptyFolder.png';
+import goBackIcon from './img/goBackIcon.png';
 import { UserContext } from './components/UserContext';
 import SignIn from './components/SignIn';
 import SaveMessage from './components/SaveMessage';
 import DeleteMessage from './components/DeleteMessage';
 import AddBoardMessage from './components/AddBoard';
+import About from './components/About';
 
 const App = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -30,7 +32,6 @@ const App = () => {
   const [board, setBoard] = useState(null);
   const [currentBoard, setCurrentBoard] = useState(null);
   const [boardTitle, setBoardTitle] = useState('');
-  // const [newBoardAdded, setNewBoardAdded] = useState(false);
   const [showGroup, setShowGroup] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [areSure, setAreSure] = useState(false);
@@ -39,6 +40,9 @@ const App = () => {
   const [startSignUp, setStartSignUp] = useState(false);
   const [numberOfBoards, setNumberOfBoards] = useState(null);
   const [showAddBoard, setShowAddBoard] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showBoardsFolder, setShowBoardsFolder] = useState(false);
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
   }, []);
@@ -79,7 +83,6 @@ const App = () => {
       setShowGroup(false);
     }, 285);
     setHasChanged(false);
-    // setNewBoardAdded(false);
   };
 
   const deleteBoard = () => {
@@ -96,6 +99,7 @@ const App = () => {
       saveBoardHelper(setBoards, tempBoards);
       setShowGroup(!showGroup);
     }, 285);
+    setHasChanged(false);
   };
 
   const addBoard = async () => {
@@ -117,10 +121,17 @@ const App = () => {
   const showMyBoards = () => {
     if (hasChanged) {
       setAreSure(true);
-      // showGroup && setShowGroup(!showGroup);
       return;
     }
-    showGroup && setShowGroup(!showGroup);
+    setShowBoardsFolder(true);
+  };
+
+  const goBack = () => {
+    if (hasChanged) {
+      setAreSure(true);
+      return;
+    }
+    setShowGroup(false);
   };
 
   const providerValue = useMemo(
@@ -153,6 +164,10 @@ const App = () => {
       numberOfBoards,
       setShowAddBoard,
       showAddBoardMessage,
+      setShowAbout,
+      showAbout,
+      setShowBoardsFolder,
+      setShowWelcome,
     }),
     [
       user,
@@ -169,6 +184,10 @@ const App = () => {
       showAddBoardMessage,
       hasChanged,
       setHasChanged,
+      showAbout,
+      setShowAbout,
+      showBoardsFolder,
+      showWelcome,
     ]
   );
 
@@ -183,11 +202,13 @@ const App = () => {
               setShowErrorMessage={setShowErrorMessage}
             />
           )}
+          {showWelcome && <Welcome />}
+          {user && showBoardsFolder ? <BoardsFolder /> : null}
+          {showAbout && <About />}
           {signIn && <SignIn />}
           {startSignUp && <SignIn startSignUp={true} />}
           {areSure && <SaveMessage boardTitle={boardTitle} />}
           {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
-          {!user ? <Welcome /> : !showGroup ? <BoardsFolder /> : null}
           {showGroup && <DragGroup data={boards[board]} />}
           {showAddBoard && <AddBoardMessage />}
         </div>
@@ -209,6 +230,11 @@ const App = () => {
             />
             <br></br>
             <span>Delete Board</span>
+          </div>
+          <div className="go-back-icon-group">
+            <img onClick={() => goBack()} src={goBackIcon} alt="go back icon" />
+            <br></br>
+            <span>Close Board</span>
           </div>
           <div className="my-boards-icon-group">
             <img

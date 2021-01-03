@@ -77,7 +77,7 @@ const SignIn = ({ startSignUp = false }) => {
           <button
             type="button"
             className="delete-group-button"
-            onClick={() => setSignIn(false)}
+            onClick={() => handleCancel()}
           >
             X
           </button>
