@@ -15,7 +15,6 @@ router.post('/', auth, async (req, res) => {
     )
       .select('-password')
       .exec();
-    console.log(result);
     res.send(result.boards);
   } catch (err) {
     console.error(err);

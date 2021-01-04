@@ -1,5 +1,5 @@
 import React from 'react';
-import errorIcon from '../img/Error.png';
+import errorIcon from '../../img/Error.png';
 const ErrorMessage = ({ errorMessages, setShowErrorMessage }) => {
   return (
     <div className="error-message-container">

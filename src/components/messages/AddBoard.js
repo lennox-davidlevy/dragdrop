@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import saveChangesIcon from '../img/saveChanges.png';
-import { UserContext } from './UserContext';
+import saveChangesIcon from '../../img/saveChanges.png';
+import { UserContext } from '../UserContext';
 const AddBoardMessage = () => {
   const { setBoardTitle, boardTitle, setShowAddBoard, addBoard } = useContext(
     UserContext

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from './UserContext';
 import emptyFolderIcon from '../img/emptyFolder.png';
 import fullFolderIcon from '../img/fullFolder.png';
-import { setOnTopHelper } from '../components/helpers/frontendHelpers';
+import { setOnTopHelper } from './utilities/renderUtility';
 
 const BoardsFolder = () => {
   const {
@@ -11,9 +11,7 @@ const BoardsFolder = () => {
     setBoardTitle,
     setShowGroup,
     showGroup,
-    addBoard,
     numberOfBoards,
-    setShowAddBoard,
     showAddBoardMessage,
     setShowBoardsFolder,
   } = useContext(UserContext);
