@@ -2,7 +2,7 @@
 
 ![](hotstove.png)
 
-This started as a project to create a Kanban board in React, but rendered with masonry a la pintrest. While I was building it, I decided to try to style it in, and then give it some very basic functionality of the Windows 95 OS.
+This started as a project to create a Kanban board in React, but rendered with masonry a la Pinterest. While I was building it, I decided to try to style it in, and then give it some very basic functionality of the Windows 95 OS.
 
 ![](desktop.png)
 
