@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import notepadIcon from '../img/notepad.png';
 import { UserContext } from './UserContext';
-import { setOnTopHelper } from '../components/helpers/frontendHelpers';
+import { setOnTopHelper } from './utilities/renderUtility';
 
 const Welcome = () => {
   const {

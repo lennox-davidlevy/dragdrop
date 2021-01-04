@@ -1,28 +1,23 @@
 import './App.css';
 import React, { useState, useMemo, useEffect } from 'react';
-
-// import { boardData } from './dummyData';
 import {
   authenticateOnLoad,
   saveBoardHelper,
   templateBoard,
   checkForDupes,
-} from './components/helpers/backendHelpers';
+} from './components/utilities/backendUtilities';
+import { UserContext } from './components/UserContext';
 import DragGroup from './components/DragGroup';
-import NavBar from './components/NavBar';
-import ErrorMessage from './components/ErrorMessage';
+import NavBar from './components/taskbar/NavBar';
+import ErrorMessage from './components/messages/ErrorMessage';
 import Welcome from './components/Welcome';
 import BoardsFolder from './components/BoardsFolder';
-import recycleIcon from './img/recycleBin.png';
-import diskBlueIcon from './img/diskBlue.png';
-import emptyFolderIcon from './img/emptyFolder.png';
-import goBackIcon from './img/goBackIcon.png';
-import { UserContext } from './components/UserContext';
 import SignIn from './components/SignIn';
-import SaveMessage from './components/SaveMessage';
-import DeleteMessage from './components/DeleteMessage';
-import AddBoardMessage from './components/AddBoard';
-import About from './components/About';
+import SaveMessage from './components/messages/SaveMessage';
+import DeleteMessage from './components/messages/DeleteMessage';
+import AddBoardMessage from './components/messages/AddBoard';
+import About from './components/taskbar/About';
+import DesktopIcons from './components/DesktopIcons';
 
 const App = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -43,6 +38,7 @@ const App = () => {
   const [showAbout, setShowAbout] = useState(false);
   const [showWelcome, setShowWelcome] = useState(true);
   const [showBoardsFolder, setShowBoardsFolder] = useState(false);
+
   useEffect(() => {
     authenticateOnLoad(setUser, setBoards);
   }, []);
@@ -212,31 +208,13 @@ const App = () => {
           {showGroup && <DragGroup data={boards[board]} />}
           {showAddBoard && <AddBoardMessage />}
         </div>
-        <div className="desktop-icons">
-          <div onClick={() => saveBoard()} className="save-board-icon-group">
-            <img src={diskBlueIcon} alt="save icon" />
-            <br></br>
-            <span>Save Board</span>
-          </div>
-          <div
-            onClick={() => showGroup && setAreSureDelete(true)}
-            className="delete-board-icon-group"
-          >
-            <img src={recycleIcon} alt="delete icon" />
-            <br></br>
-            <span>Delete Board</span>
-          </div>
-          <div onClick={() => goBack()} className="go-back-icon-group">
-            <img src={goBackIcon} alt="go back icon" />
-            <br></br>
-            <span>Close Board</span>
-          </div>
-          <div onClick={() => showMyBoards()} className="my-boards-icon-group">
-            <img src={emptyFolderIcon} alt="my boards icon" />
-            <br></br>
-            <span>My Boards</span>
-          </div>
-        </div>
+        <DesktopIcons
+          saveBoard={saveBoard}
+          showGroup={showGroup}
+          setAreSureDelete={setAreSureDelete}
+          goBack={goBack}
+          showMyBoards={showMyBoards}
+        />
       </UserContext.Provider>
     </div>
   );

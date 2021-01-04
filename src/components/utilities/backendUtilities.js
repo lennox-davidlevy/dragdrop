@@ -1,19 +1,9 @@
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 
-//WITHOUT NODE
-// const getWords = (setRandomWord) => {
-//   fetch(`https://random-word-api.herokuapp.com/word?number=1000`)
-//     .then((res) => res.json())
-//     .then(
-//       (result) => {
-//         setRandomWord(result);
-//       },
-//       (error) => console.log(error)
-//     );
-// };
-
-//WITH NODE
+//A nice way to automatically generate group names rather than just
+//"New Group 1", "New Group 2". The idea came from a game called Factorio
+//where new train stations would be given random names of backers.
 const getWords = async (setRandomWord) => {
   try {
     const res = await axios.get('/randomWord');
@@ -23,6 +13,8 @@ const getWords = async (setRandomWord) => {
   }
 };
 
+//I wanted to recreate the duplicate naming conventions in windows
+//ie "untitled", "untitled(2)" etc.
 const checkForDupes = (boards, str, id) => {
   const dict = {};
   for (let i = 0; i < boards.length; i++) {
@@ -47,6 +39,7 @@ const checkForDupes = (boards, str, id) => {
   return newTitle;
 };
 
+//
 const myFirstBoard = {
   id: uuidv4(),
   title: 'My First Board!',
@@ -87,6 +80,9 @@ const templateBoard = function (str) {
   };
 };
 
+//login and auth using JWT. I am using JWT as a way to store user session here
+//storing a token that expires in 1hr in local storage, and adding it to axios'
+//common headers after authentication.
 const loginAuthentication = async ({ email, password }) => {
   const options = {
     headers: {
@@ -148,6 +144,7 @@ const authenticateOnLoad = async (setUser, setBoards) => {
   }
 };
 
+//sign out destroys token
 const signOut = (setUser, setBoard, setShowGroup) => {
   localStorage.removeItem('token');
   delete axios.defaults.headers.common['x-auth-token'];
@@ -156,13 +153,16 @@ const signOut = (setUser, setBoard, setShowGroup) => {
   setShowGroup(false);
 };
 
+//initially stored individual boards as its own model, in their own document
+//then pushed the reference to the user.boards array.
+//decided store a new array of of all user boards after change
+//may revert, so users can share boards publicly using the board_id as a param
 const saveBoardHelper = async (setBoards, tempBoards) => {
   const options = {
     headers: {
       'Content-Type': 'application/json',
     },
   };
-  // const body = JSON.stringify(board);
   const body = JSON.stringify(tempBoards);
   try {
     const res = await axios.post('/boards', body, options);

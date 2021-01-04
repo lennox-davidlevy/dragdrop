@@ -1,5 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { loginAuthentication, registerUser } from './helpers/backendHelpers';
+import {
+  loginAuthentication,
+  registerUser,
+} from './utilities/backendUtilities';
 import { UserContext } from './UserContext';
 import loginIcon from '../img/loginIcon.png';
 
@@ -48,15 +51,10 @@ const SignIn = ({ startSignUp = false }) => {
     } catch (err) {
       console.error(`clientside err ${err}`);
     }
-    // const resetLogin = document.getElementById('login-account-nav');
-    // resetLogin.classList.remove('clicked');
     setFormData(initialState);
   };
 
   const handleCancel = (e, name) => {
-    // e.preventDefault();
-    // const resetLogin = document.getElementById(name);
-    // resetLogin.classList.remove('clicked');
     setSignIn(false);
     setShowErrorMessage(false);
     setFormData(initialState);

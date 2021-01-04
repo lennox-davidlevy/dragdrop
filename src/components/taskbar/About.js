@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import notepadIcon from '../img/notepad.png';
-import mePixelated from '../img/mePixelated2.jpg';
-import { UserContext } from './UserContext';
-import { setOnTopHelper } from '../components/helpers/frontendHelpers';
+import notepadIcon from '../../img/notepad.png';
+import mePixelated from '../../img/mePixelated2.jpg';
+import { UserContext } from '../UserContext';
+import { setOnTopHelper } from '../utilities/renderUtility';
 
 const About = () => {
   const { setShowAbout } = useContext(UserContext);
@@ -57,7 +57,11 @@ const About = () => {
             <br></br>
             <br></br>
             <b>
-              <a href="https://github.com/lennox-davidlevy" target="_blank">
+              <a
+                href="https://github.com/lennox-davidlevy"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Github
               </a>
             </b>
@@ -67,6 +71,7 @@ const About = () => {
               <a
                 href="https://www.linkedin.com/in/david-levy-b3a1aa121/"
                 target="_blank"
+                rel="noreferrer"
               >
                 Linkedin
               </a>
@@ -74,7 +79,11 @@ const About = () => {
             <br></br>
             <br></br>
             <b>
-              <a href="https://david-lennox.com" target="_blank">
+              <a
+                href="https://david-lennox.com"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Portfolio
               </a>
             </b>

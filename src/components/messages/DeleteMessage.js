@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { UserContext } from './UserContext';
-import saveChangesIcon from '../img/saveChanges.png';
+import { UserContext } from '../UserContext';
+import saveChangesIcon from '../../img/saveChanges.png';
 
 const DeleteMessage = ({ boardTitle }) => {
   const { setAreSureDelete, deleteBoard } = useContext(UserContext);

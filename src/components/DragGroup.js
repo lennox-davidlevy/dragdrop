@@ -1,20 +1,19 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
-import DragItems from './DragItems';
-import Button from './Button';
 import Masonry from 'react-masonry-css';
+import {
+  breakpointColumnsObj,
+  handleImageId,
+} from './utilities/renderUtility.js';
 import {
   handleDragStartHelper,
   handleDragEnterHelper,
-  addCardHelper,
-  addGroupHelper,
-  returnItems,
-  breakpointColumnsObj,
-  handleImageId,
-  setOnTopHelper,
-} from './helpers/frontendHelpers.js';
-import { getWords } from './helpers/backendHelpers';
+} from './utilities/dragUtility';
+import { returnItems } from './utilities/itemsUtility';
+import { addCardHelper, addGroupHelper } from './utilities/modifyGroupUtility';
+import { getWords } from './utilities/backendUtilities';
 import { v4 as uuidv4 } from 'uuid';
 import { UserContext } from './UserContext';
+import DragItems from './DragItems';
 
 const DragGroup = ({ data }) => {
   const [list, setList] = useState(data['groups']);
@@ -204,7 +203,6 @@ const DragGroup = ({ data }) => {
     optionIdx,
     addCard,
     addGroup,
-    Button,
     deleteGroup,
     setList,
     imageId,
@@ -212,11 +210,7 @@ const DragGroup = ({ data }) => {
   );
 
   return (
-    <div
-      // onClick={() => setOnTopHelper('drag')}
-      id="drag_drop"
-      className="drag_drop"
-    >
+    <div id="drag_drop" className="drag_drop">
       <div className="board-title-header">
         Title:
         <input value={boardTitle} onChange={(e) => handleTitleChange(e)} />

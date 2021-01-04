@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import windowsIcon from '../img/windowsIcon.png';
-import { signOut } from './helpers/backendHelpers';
-import { UserContext } from './UserContext';
+import windowsIcon from '../../img/windowsIcon.png';
+import { signOut } from '../utilities/backendUtilities';
+import { UserContext } from '../UserContext';
 
 const StartMenu = () => {
   const [showMenu, setShowMenu] = useState(false);

@@ -68,13 +68,4 @@ router.post(
   }
 );
 
-router.get('/', async (req, res) => {
-  try {
-    res.status(200).send('router get works');
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: 'server error' });
-  }
-});
-
 module.exports = router;
