@@ -1,6 +1,4 @@
-//Add your mongoURL and jwtSecret here
-
-// {
-//   "mongoURL": "mongodb://localhost:27017/dragdrop",
-//   "jwtSecret": "mycoolsecret"
-// }
+{
+  "mongoURL": "ADD YOUR MONGO URI HERE",
+  "jwtSecret": "ADD YOUR JWT SECRET HERE"
+}
