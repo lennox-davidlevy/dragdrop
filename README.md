@@ -24,6 +24,11 @@ $ npm install
 
 Find /config/default\_(temp).json and change the values to your MongoURI (either from atlas, or locally) and your JWT secret (it can be anything) and rename the file to default.json. Make sure not to push to git until you change the name of the file to default.json as its already in .gitignore)
 
+```
+$ cd dragdrop
+$ npm run dev
+```
+
 ## Planned Implementations
 
 I plan on adding these features soon:
