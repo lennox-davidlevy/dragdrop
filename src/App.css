@@ -27,9 +27,6 @@ body {
 }
 
 .App-header {
-  background-color: #008080;
-  display: flex;
-
   display: flex;
   justify-content: center;
   color: white;
@@ -38,9 +35,7 @@ body {
 .drag_drop {
   padding-top: 4.5rem;
   padding-bottom: 4.5rem;
-
   transform-origin: 4% 8%;
-
   transition: all 0.3s ease-in-out;
 }
 
@@ -63,7 +58,8 @@ body {
   border-radius: 2px;
   padding: 0 0 0.3rem 0;
   margin: 0 10px 10px 10px;
-  border: 1px solid white;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
 }
 
 .current {
@@ -92,6 +88,22 @@ body {
   min-height: 60px;
 }
 
+.item-content textarea {
+  background-color: transparent;
+  border: 0px solid;
+  min-width: 258px;
+  max-width: 258px;
+}
+
+textarea {
+  background-color: transparent;
+  border: 0px solid;
+  height: 50px;
+  width: 160px;
+  color: black;
+  resize: none;
+}
+
 .photo {
   height: 150px;
   width: 160px;
@@ -107,7 +119,7 @@ body {
 
 .title-text {
   margin: 2px 0 0 1px;
-  float: left;
+  /* float: left; */
   font-family: Tahoma;
   font-weight: bold;
   font-size: 15px;
@@ -130,6 +142,10 @@ body {
   padding: 2px 3px;
   margin-bottom: 0.3rem;
   margin-top: 2px;
+}
+
+button:focus {
+  outline: 0;
 }
 
 .my-masonry-grid {
@@ -170,7 +186,7 @@ body {
   float: right;
   width: 16px;
   height: 16.5px;
-  border-width: 1px;
+  border: 1px solid;
   border-color: #ffffff #808080 #808080 #ffffff;
   padding: 0;
   font-size: 9px;
@@ -181,7 +197,7 @@ body {
 
 .add-card-button {
   margin: 2px 2px 2px 0;
-  border-width: 1px;
+  border: 2px solid;
   border-color: #ffffff #808080 #808080 #ffffff;
   padding: 3px;
   font-size: 11px;
@@ -204,29 +220,17 @@ body {
   justify-content: space-between;
 }
 
-/* .title-text {
-  margin: 2px 0 0 1px;
-  float: left;
-  font-family: Tahoma;
-  font-weight: bold;
-  font-size: 15px;
-  background-color: transparent;
-  border: 0px solid;
-  color: #fff;
-  width: 250px;
-} */
-
-textarea {
+/* textarea {
   background-color: transparent;
   border: 0px solid;
   height: 50px;
   width: 160px;
   color: black;
   resize: none;
-}
+} */
 
 .taskBar {
-  height: 30px;
+  max-height: 30px;
   background-color: rgb(192, 192, 192);
   position: fixed;
   bottom: 0px;
@@ -240,9 +244,7 @@ textarea {
   z-index: 101;
 }
 .start-nav {
-  /* width: 85px; */
   font-size: 13px;
-  /* font-weight: 900; */
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
@@ -291,11 +293,6 @@ textarea {
   margin-top: 215px;
   margin-left: 10px;
 }
-#left .num95 {
-  font-weight: 100 !important;
-  color: white;
-}
-
 .divider {
   height: 1px;
   border-top: ridge 1px white;
@@ -310,74 +307,16 @@ textarea {
   pointer-events: none;
 }
 
-.right-side-nav {
-  display: flex;
-}
-
+/* Clock */
 .group-num-nav {
   width: 65px;
   font-size: 12px;
-  /* font-weight: 900; */
   outline: 1px solid #000000;
   background: #c0c0c0;
   border-style: solid;
   border-color: #808080 #ffffff #ffffff #808080;
   padding: 4px 10px;
   margin-top: 1px;
-}
-
-.login-account-nav {
-  width: 85px;
-  font-size: 13px;
-  /* font-weight: 900; */
-  outline: 1px solid #000000;
-  background: #c0c0c0;
-  border-style: solid;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  padding: 4px 10px;
-  margin-top: 1px;
-  cursor: pointer;
-}
-
-.login-form {
-  float: right;
-  border-width: 1px;
-  border-style: solid;
-  width: 200px;
-  /* height: 90px; */
-  background: #c0c0c0;
-  position: absolute;
-  top: 31px;
-  right: 1px;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  box-shadow: 1px 2px;
-}
-
-.login-container {
-  margin-top: 3px;
-}
-
-.login-button {
-  margin: 2px 2px 2px 0;
-  border-width: 1px;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  padding: 3px;
-  font-size: 11px;
-  /* font-weight: bold; */
-  font-family: Tahoma;
-  text-align: center;
-  width: 55px;
-}
-
-.login-button-group {
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
-.login-title {
-  font-size: 13px;
-  font-family: Tahoma;
-  /* font-weight: bold; */
 }
 
 .grab-bar {
@@ -389,24 +328,24 @@ textarea {
 }
 
 span.grippy {
-  content: '...';
+  /* content: '...'; */
   width: 10px;
   height: 20px;
-  display: inline-block;
-  overflow: hidden;
+  /* display: inline-block; */
+  /* overflow: hidden; */
   line-height: 5px;
   padding: 3px 4px;
-  vertical-align: middle;
-
-  margin-right: 0px;
-  margin-top: 0px;
+  /* vertical-align: middle; */
+  /* margin-right: 0px; */
+  /* margin-top: 0px; */
   margin-bottom: 1px;
-  font-size: 12px;
+  /* font-size: 12px; */
   font-family: sans-serif;
   letter-spacing: 2px;
   color: #cccccc;
   text-shadow: 1px 0 1px black;
 }
+
 span.grippy::after {
   content: '.. .. ..';
 }
@@ -445,7 +384,7 @@ button {
 .error-title-text {
   margin: 2px 0 0 1px;
   float: left;
-  font-family: Tahoma;
+  /* font-family: Tahoma; */
   font-weight: bold;
   font-size: 15px;
   background-color: transparent;
@@ -469,7 +408,6 @@ button {
   border-color: #ffffff #808080 #808080 #ffffff;
   padding: 4px 10px;
   margin-top: 31px;
-  /* left: -44px; */
   margin-left: 45%;
 }
 
@@ -484,33 +422,6 @@ button {
   margin-right: 24px;
 }
 
-.account-button {
-  margin: 2px 2px 2px 0;
-  border-width: 1px;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  padding: 3px;
-  font-size: 11px;
-  /* font-weight: bold; */
-  font-family: Tahoma;
-  text-align: center;
-  width: 60px;
-}
-
-.account-title {
-  font-size: small;
-  margin-bottom: 25px;
-}
-
-/* .welcome-container {
-  width: 400px;
-  background: white;
-  height: 400px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  margin-top: 100px;
-  color: black;
-} */
 .desktop-icons {
   position: fixed;
   top: 7%;
@@ -524,9 +435,6 @@ button {
 .desktop-icons > * {
   margin: 12px;
   cursor: pointer;
-}
-
-.desktop-icons > * {
   text-shadow: 1px 1px black;
 }
 
@@ -537,8 +445,8 @@ button {
 }
 
 .folder {
-  vertical-align: top;
-  display: inline-block;
+  /* vertical-align: top;
+  display: inline-block; */
   text-align: center;
   cursor: pointer;
   margin-bottom: 25px;
@@ -546,22 +454,22 @@ button {
 
 .caption {
   display: block;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .start-menu-container {
-  float: left;
+  /* float: left; */
   border-width: 1px;
   border-style: solid;
-  width: 200px;
+  /* width: 200px; */
   /* height: 90px; */
   background: #c0c0c0;
   position: absolute;
   bottom: 33px;
-  left: 0px;
+  /* left: 0px; */
   border-color: #ffffff #808080 #808080 #ffffff;
   box-shadow: 1px 2px;
-  width: 171px;
+  /* width: 171px; */
   text-align: left;
 }
 
@@ -591,7 +499,7 @@ button {
 .delete-message-button-group {
   display: flex;
   flex-direction: row;
-  margin-left: 32%;
+  margin-left: 33%;
 }
 
 .delete-message-button-group .message-button {
@@ -717,12 +625,6 @@ button {
 .welcome-buttons {
   cursor: pointer;
 }
-
-/* .folder-container {
-  width: 500px;
-  height: 500px;
-  background: white;
-} */
 
 .folder-container .title-container {
   background-color: #7f7f7f;
