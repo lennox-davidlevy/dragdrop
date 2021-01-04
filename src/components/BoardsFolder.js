@@ -19,6 +19,7 @@ const BoardsFolder = () => {
     if (showGroup) return;
     const boardsContainer = document.getElementById('boards-folder-container');
     boardsContainer.classList.remove('on-top');
+    setShowBoardsFolder(false);
     setBoard(key);
     setShowGroup(true);
     setBoardTitle(boardTitle);
