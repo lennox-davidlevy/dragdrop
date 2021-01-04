@@ -56,6 +56,7 @@ const App = () => {
     const a = document.getElementById('drag_drop');
     if (a === null) {
       setShowGroup(false);
+      setShowBoardsFolder(true);
       return;
     }
     a.classList.add('collapse');
@@ -63,6 +64,7 @@ const App = () => {
     if (!hasChanged) {
       setTimeout(() => {
         setShowGroup(false);
+        setShowBoardsFolder(true);
       }, 285);
       return;
     }
@@ -77,6 +79,7 @@ const App = () => {
     setTimeout(() => {
       saveBoardHelper(setBoards, tempBoards);
       setShowGroup(false);
+      setShowBoardsFolder(true);
     }, 285);
     setHasChanged(false);
   };
@@ -96,6 +99,7 @@ const App = () => {
       setShowGroup(!showGroup);
     }, 285);
     setHasChanged(false);
+    setShowBoardsFolder(true);
   };
 
   const addBoard = async () => {
@@ -106,6 +110,7 @@ const App = () => {
     saveBoardHelper(setBoards, tempBoards).then(() => {
       setBoard(boards.length);
       setShowGroup(true);
+      setShowBoardsFolder(false);
     });
   };
 
