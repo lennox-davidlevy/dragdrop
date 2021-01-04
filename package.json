@@ -28,14 +28,18 @@
     "eject": "react-scripts eject",
     "client-dev": "react-scripts start",
     "server-dev": "nodemon server/index.js",
-    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "start": "node server/index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build",
+    "dev": "concurrently \"npm run server-dev\" \"npm run client-dev\""
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "node": "10.16.0"
   },
   "proxy": "http://localhost:5000",
   "browserslist": {
