@@ -24,3 +24,5 @@ yarn-error.log*
 .env
 .prettierrc
 .eslintcache
+/config/default.json
+/config/production.json
