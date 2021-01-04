@@ -16,9 +16,12 @@ app.use('/randomWord', require('./routes/randomWord'));
 app.use('/auth', require('./routes/auth'));
 app.use('/boards', require('./routes/boards'));
 
-// if(process.env.NODE_ENV === 'production'){
-//   app.use()
-// }
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('../build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../build', 'index.html'));
+  });
+}
 app.listen(PORT, () => {
   console.log(`server started on ${PORT}...`);
 });
