@@ -1,4 +1,0 @@
-{
-  "mongoURL": "mongodb+srv://davidUser:lulufastbun@win95draganddrop.atzf0.mongodb.net/dragAnddrop?retryWrites=true&w=majority",
-  "jwtSecret": "mycoolsecret"
-}
