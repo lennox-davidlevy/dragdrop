@@ -189,6 +189,7 @@ const App = () => {
       setShowAbout,
       showBoardsFolder,
       showWelcome,
+      board,
     ]
   );
 

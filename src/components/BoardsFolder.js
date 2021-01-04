@@ -20,8 +20,8 @@ const BoardsFolder = () => {
     const boardsContainer = document.getElementById('boards-folder-container');
     boardsContainer.classList.remove('on-top');
     setShowBoardsFolder(false);
-    setBoard(key);
     setShowGroup(true);
+    setBoard(key);
     setBoardTitle(boardTitle);
   };
 
