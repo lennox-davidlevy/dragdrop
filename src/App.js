@@ -40,10 +40,13 @@ const App = () => {
   const [showBoardsFolder, setShowBoardsFolder] = useState(false);
 
   useEffect(() => {
-    authenticateOnLoad(setUser, setBoards);
+    (async function authenticateUser() {
+      await authenticateOnLoad(setUser, setBoards);
+    })();
   }, []);
 
   useEffect(() => {
+    if (!boards) return;
     setNumberOfBoards(boards.length);
   }, [boards]);
 
@@ -76,10 +79,14 @@ const App = () => {
       groups: currentBoard,
     };
     tempBoards[board] = newBoard;
-    setTimeout(() => {
-      saveBoardHelper(setBoards, tempBoards);
-      setShowGroup(false);
-      setShowBoardsFolder(true);
+    setTimeout(async () => {
+      try {
+        await saveBoardHelper(setBoards, tempBoards);
+        setShowGroup(false);
+        setShowBoardsFolder(true);
+      } catch (err) {
+        console.error(err);
+      }
     }, 285);
     setHasChanged(false);
   };
@@ -94,9 +101,13 @@ const App = () => {
     tempBoards = tempBoards.filter((item, el) => {
       return el !== board;
     });
-    setTimeout(() => {
-      saveBoardHelper(setBoards, tempBoards);
-      setShowGroup(!showGroup);
+    setTimeout(async () => {
+      try {
+        await saveBoardHelper(setBoards, tempBoards);
+        setShowGroup(!showGroup);
+      } catch (err) {
+        console.error(err);
+      }
     }, 285);
     setHasChanged(false);
     setShowBoardsFolder(true);
@@ -107,11 +118,13 @@ const App = () => {
     let tempBoards = JSON.parse(JSON.stringify(boards));
     let tempTitle = checkForDupes(tempBoards, tempBoardTitle);
     tempBoards.push(templateBoard(tempTitle));
-    saveBoardHelper(setBoards, tempBoards).then(() => {
-      setBoard(boards.length);
-      setShowGroup(true);
-      setShowBoardsFolder(false);
-    });
+    saveBoardHelper(setBoards, tempBoards)
+      .then(() => {
+        setBoard(boards.length);
+        setShowGroup(true);
+        setShowBoardsFolder(false);
+      })
+      .catch((err) => console.error(err));
   };
 
   const showAddBoardMessage = () => {
@@ -211,7 +224,7 @@ const App = () => {
           {startSignUp && <SignIn startSignUp={true} />}
           {areSure && <SaveMessage boardTitle={boardTitle} />}
           {areSureDelete && <DeleteMessage boardTitle={boardTitle} />}
-          {showGroup && <DragGroup data={boards[board]} />}
+          {showGroup && boards[board] && <DragGroup data={boards[board]} />}
           {showAddBoard && <AddBoardMessage />}
         </div>
         <DesktopIcons
